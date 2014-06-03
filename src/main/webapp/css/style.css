@@ -1,0 +1,16 @@
+.background {
+  
+  background-color: #e2e2e2;
+}
+.margin {
+    margin: 10px !important;
+}
+
+.center {
+    margin-left: !important 100px;
+   
+}
+.red {
+    background-color: red;
+}
+

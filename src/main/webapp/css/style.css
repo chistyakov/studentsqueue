@@ -1,3 +1,11 @@
+body {
+	padding: 0 20px;
+}
+
+i {
+	cursor: pointer;
+}
+
 .background {
   
   background-color: #e2e2e2;
@@ -13,4 +21,45 @@
 .red {
     background-color: red;
 }
+
+.add_queue h4 {
+	display: inline-block;
+}
+
+.add_queue .icon-plus {
+	cursor: pointer;
+	opacity: 0.8;
+}
+.add_queue .icon-plus:hover {
+	opacity: 1;
+}
+
+.btn.add_queue_btn {
+	display: block;
+	margin-top: 10px;
+	margin-left: 130px;
+}
+
+.add_queue_form {
+	display: none;
+}
+
+.add_queue_form label {
+	width: 120px;
+}
+
+.add_queue_form > * {
+	margin: 5px;
+}
+
+.well {
+	padding: 5px;
+}
+
+.expand-queue {
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+
 

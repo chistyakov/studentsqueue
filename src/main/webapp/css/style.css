@@ -10,12 +10,12 @@ i {
   
   background-color: #e2e2e2;
 }
-.margin {
+.margin { 
     margin: 10px !important;
 }
 
 .center {
-    margin-left: !important 100px;
+    margin-left: 100px !important ;
    
 }
 .red {

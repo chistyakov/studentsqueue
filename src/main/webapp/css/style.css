@@ -18,8 +18,8 @@ i {
     margin-left: 100px !important ;
    
 }
-.red {
-    background-color: red;
+.current {
+    background-color: #aaa;
 }
 
 .add_queue h4 {

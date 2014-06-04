@@ -11,7 +11,7 @@
 	<div ng-app='myApp'>
 		<div ng-controller="TodoCtrl" >
 			<div class='margin'>
-				<h3>This is student's page <i class="icon-th-list pull-right"></i></h3>
+				<h3>This is {{current_student.studentName}}'s page <i class="icon-th-list pull-right"></i></h3>
 			</div>
 			<hr></hr>
 			<!--
@@ -20,28 +20,28 @@
 					<span> student</span>
 				</div>
 			-->
-			<div ng-show='isStudent'>
-				<h4 class="margin">Queues list:</h4>	            
+			<div>
+				<h4 class="margin">My queues:</h4>	            
 				<div class="queues">
-					<div ng-repeat="queue in queues" class='well margin'>
+					<div ng-repeat="queue in queues | filter:isCurrentQueue()" class='well margin'>
 						<span ng-click='expand(queue.id)'>
 							<i ng-class="{'icon-angle-down': !queue.expanded, 'icon-angle-up': queue.expanded}"class="expand-queue icon-large"></i>
 						</span>
 						<span class="lead">{{queue.name}}</span>
-						<span class="lead">({{queue.items.length}})</span>
+						<span class="lead">({{queue.students.length}})</span>
 						<span ng-click='deleteStudentToQueues(queue.id)'>
 							<i class="icon-remove pull-right"></i>
 						</span>
-						<table class="table" ng-show='queue.expanded'>
+						<table ng-show='queue.expanded' class="table">
 							<tr>
 								<th>Number</th>
-								<th>Fio</th>
-								<th>Description</th>
+								<th>Student</th>
+								<th>Group</th>
 							</tr>
-							<tr ng-repeat="item in queue.items| orderBy:'number'">
-								<td ng-class="{'red': item.id==studentInfo.id}" >{{$index+1}}</td>
-								<td ng-class="{'red': item.id==studentInfo.id}">{{item.fio}}</td>
-								<td ng-class="{'red': item.id==studentInfo.id}">{{item.description}}</td>
+							<tr ng-repeat="item in queue.students| orderBy:'rank'">
+								<td ng-class="{'current': item.studentId.userId==current_student.studentId.userId}" >{{item.rank}}</td>
+								<td ng-class="{'current': item.studentId.userId==current_student.studentId.userId}">{{item.studentName}}</td>
+								<td ng-class="{'current': item.studentId.userId==current_student.studentId.userId}">{{item.studentId.groupName}}</td>
 							</tr>
 						</table>
 					</div>
@@ -55,8 +55,8 @@
 						<div>
 							<label>Select queues</label>
 							<select class="dropdown" 
-								ng-options="item.name for item in arrayQueues | filter:filterQueues()"
-								ng-model="selectNewQueue"
+								ng-options="item.name for item in queues | filter:isNewQueue()"
+								ng-model="newQueue"
 								placeholder='Select queue'
 							></select>
 						</div>

@@ -93,7 +93,7 @@
                         }
                     }                    
                     for (var i = 0; i < item.students.length; i++) {
-                        if (item.students[i].student_id == $scope.current_student) {
+                        if (item.students[i].student_id == $scope.current_student.id) {
                             show = false; 
                             break;
                         }

@@ -24,24 +24,24 @@
 				<h4 class="margin">My queues:</h4>	            
 				<div class="queues">
 					<div ng-repeat="queue in queues | filter:isCurrentQueue()" class='well margin'>
-						<span ng-click='expand(queue.id)'>
-							<i ng-class="{'icon-angle-down': !queue.expanded, 'icon-angle-up': queue.expanded}"class="expand-queue icon-large"></i>
+						<span ng-click='expand(queue)'>
+							<i class="expand-queue icon-large icon-angle-down"></i>
 						</span>
 						<span class="lead">{{queue.name}}</span>
 						<span class="lead">({{queue.students.length}})</span>
-						<span ng-click='deleteStudentToQueues(queue.id)'>
+						<span ng-click='deleteStudentFromQueue(queue)'>
 							<i class="icon-remove pull-right"></i>
 						</span>
-						<table ng-show='queue.expanded' class="table">
+						<table class="table">
 							<tr>
 								<th>Number</th>
 								<th>Student</th>
 								<th>Group</th>
 							</tr>
-							<tr ng-repeat="item in queue.students| orderBy:'rank'">
-								<td ng-class="{'current': item.studentId.userId==current_student.studentId.userId}" >{{item.rank}}</td>
-								<td ng-class="{'current': item.studentId.userId==current_student.studentId.userId}">{{item.studentName}}</td>
-								<td ng-class="{'current': item.studentId.userId==current_student.studentId.userId}">{{item.studentId.groupName}}</td>
+							<tr ng-repeat="item in queue.students">
+								<td ng-class="{'current': item.student_id==current_student.id}" >{{$index+1}}</td>
+								<td ng-class="{'current': item.student_id==current_student.id}">{{item.studentName}}</td>
+								<td ng-class="{'current': item.student_id==current_student.id}">{{item.groupName}}</td>
 							</tr>
 						</table>
 					</div>
@@ -53,18 +53,24 @@
 					</div>
 					<div class="add_queue_form">
 						<div>
-							<label>Select queues</label>
+							<label>Select teacher</label>
 							<select class="dropdown" 
-								ng-options="item.name for item in queues | filter:isNewQueue()"
-								ng-model="newQueue"
-								placeholder='Select queue'
+								ng-options="item.realName for item in teachers"
+								ng-model="newTeacher"
+								placeholder='Select teacher'
 							></select>
 						</div>
-						<div>	            			
-							<label>Description</label>
-							<textarea ng-model='description'></textarea>
-						</div>
-						<button class="btn add_queue_btn" ng-click='addStudentToQueues()'>Add queue</button>
+						<div ng-show="newTeacher">
+							<div>
+								<label>Select queues</label>
+								<select class="dropdown" 
+									ng-options="item.name for item in queues | filter:isNewQueue()"
+									ng-model="newQueue"
+									placeholder='Select queue'
+								></select>
+							</div>
+							<button ng-show="newQueue" class="btn add_queue_btn" ng-click='addStudentToQueue()'>Add queue</button>
+						</div>						
 					</div>                     
 				</div>	           
 			</div>

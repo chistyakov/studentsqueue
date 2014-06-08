@@ -11,7 +11,7 @@
 	<div ng-app='myApp'>
 		<div ng-controller="TodoCtrl" >
 			<div class='margin'>
-				<h3>This is {{current_student.studentName}}'s page <i class="icon-th-list pull-right"></i></h3>
+				<h3>This is {{current_student.realName}}'s page <i class="icon-th-list pull-right"></i></h3>
 			</div>
 			<hr></hr>
 			<!--

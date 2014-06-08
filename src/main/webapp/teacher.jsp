@@ -6,12 +6,17 @@
 	<link rel="stylesheet" href="lib/css/bootstrap.min.css">
 	<link rel="stylesheet" href="lib/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
+
+	<script src="lib/js/jquery.js"></script>
+	<script src="lib/js/angular.js"></script>
+	<script src="js/converter.js"></script>
+	<script src="js/teacher.js"></script>
 </head>
 <body>
 	<div ng-app='myApp'>
 		<div ng-controller="TodoCtrl" >
 			<div class='margin'>
-				<h3>This is {{current_student.realName}}'s page <i class="icon-th-list pull-right"></i></h3>
+				<h3>This is {{current_teacher.realName}}'s page <i class="icon-th-list pull-right"></i></h3>
 			</div>
 			<hr></hr>
 			<!--
@@ -23,14 +28,13 @@
 			<div>
 				<h4 class="margin">My queues:</h4>	            
 				<div class="queues">
-					<div ng-repeat="queue in queues | filter:isCurrentQueue()" class='well margin'>
-						<span ng-click='expand(queue)'>
+					<div ng-repeat="queue in queues | filter:isMyQueue()" class='well margin'>
+						<span>
 							<i class="expand-queue icon-large icon-angle-down"></i>
 						</span>
 						<span class="lead">{{queue.name}}</span>
 						<span class="lead">({{queue.students.length}})</span>
-						<span ng-click='deleteStudentFromQueue(queue)'>
-							<i class="icon-remove pull-right"></i>
+						<span >
 						</span>
 						<table class="table">
 							<tr>
@@ -42,6 +46,7 @@
 								<td ng-class="{'current': item.student_id==current_student.id}" >{{$index+1}}</td>
 								<td ng-class="{'current': item.student_id==current_student.id}">{{item.studentName}}</td>
 								<td ng-class="{'current': item.student_id==current_student.id}">{{item.groupName}}</td>
+								<td ng-click='deleteStudentFromQueue(item.student_id)'><i class="icon-remove pull-right"></i></td>
 							</tr>
 						</table>
 					</div>
@@ -51,34 +56,26 @@
 						<h4>New queue</h4>     
 						<i class="icon-plus icon-large"></i> 
 					</div>
-					<div class="add_queue_form">
+					<div class="create_queue_form">
 						<div>
-							<label>Select teacher</label>
-							<select class="dropdown" 
-								ng-options="item.realName for item in teachers"
-								ng-model="newTeacher"
-								placeholder='Select teacher'
-							></select>
+							<label>Name</label>
+							<input class="dropdown" 
+								ng-model="newQueue.name"
+								placeholder='MPI masters, 2'
+							>
 						</div>
-						<div ng-show="newTeacher">
-							<div>
-								<label>Select queues</label>
-								<select class="dropdown" 
-									ng-options="item.name for item in queues | filter:isNewQueue()"
-									ng-model="newQueue"
-									placeholder='Select queue'
-								></select>
-							</div>
-							<button ng-show="newQueue" class="btn add_queue_btn" ng-click='addStudentToQueue()'>Add queue</button>
-						</div>						
+						<div>
+							<label>Description</label>
+							<textarea
+								ng-model="newQueue.desc"
+								placeholder='Select queue'
+							></textarea>
+						</div>	
+						<button class="btn add_queue_btn" ng-click='createQueue()'>Create queue</button>					
 					</div>                     
 				</div>	           
 			</div>
 		</div>
 	</div>
-	<script src="lib/js/jquery.js"></script>
-	<script src="lib/js/angular.js"></script>
-	<script src="js/converter.js"></script>
-	<script src="js/student.js"></script>
 </body>
 </html>

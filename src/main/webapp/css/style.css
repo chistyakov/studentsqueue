@@ -1,5 +1,6 @@
 body {
-	padding: 0 20px;
+	padding: 0 20px 40px 20px;
+
 }
 
 i {
@@ -44,11 +45,13 @@ i {
 	display: none;
 }
 
-.add_queue_form label {
+.add_queue_form label,
+.create_queue_form label {
 	width: 120px;
 }
 
-.add_queue_form > * {
+.add_queue_form > *,
+.create_queue_form > *{
 	margin: 5px;
 }
 
@@ -63,6 +66,15 @@ i {
 
 .ng-scope table {
 	display: none;
+}
+/* Teacher's style */
+.create_queue_form {
+	display: none;
+}
+
+.create_queue_form textarea {
+	width: 300px;
+	height: 150px;
 }
 
 

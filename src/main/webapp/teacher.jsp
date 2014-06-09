@@ -30,14 +30,15 @@
 				<div class="queues">
 					<div ng-repeat="queue in queues | filter:isMyQueue()" class='well margin'>
 						<span>
-							<i class="expand-queue icon-large icon-angle-down"></i>
+							<i ng-show="queue.students.length" class="expand-queue icon-large icon-angle-down"></i>
 						</span>
 						<span class="lead">{{queue.name}}</span>
 						<span class="lead">({{queue.students.length}})</span>
-						<span >
+						<span ng-click='removeQueue(queue)'>
+							<i class="icon-remove pull-right" title="Delete this queue"></i>
 						</span>
-						<table class="table">
-							<tr>
+						<table class="table" ng-show="queue.students.length">
+							<tr ng-show="queue.students.length">
 								<th>Number</th>
 								<th>Student</th>
 								<th>Group</th>
@@ -46,7 +47,7 @@
 								<td ng-class="{'current': item.student_id==current_student.id}" >{{$index+1}}</td>
 								<td ng-class="{'current': item.student_id==current_student.id}">{{item.studentName}}</td>
 								<td ng-class="{'current': item.student_id==current_student.id}">{{item.groupName}}</td>
-								<td ng-click='deleteStudentFromQueue(item.student_id)'><i class="icon-remove pull-right"></i></td>
+								<td ng-click='deleteStudentFromQueue(item)'><i title="drop student from queue" class="icon-remove pull-right"></i></td>
 							</tr>
 						</table>
 					</div>
@@ -71,7 +72,7 @@
 								placeholder='Select queue'
 							></textarea>
 						</div>	
-						<button class="btn add_queue_btn" ng-click='createQueue()'>Create queue</button>					
+						<button class="btn add_queue_btn" ng-click='createNewQueue()'>Create queue</button>					
 					</div>                     
 				</div>	           
 			</div>

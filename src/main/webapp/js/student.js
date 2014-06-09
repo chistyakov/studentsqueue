@@ -7,9 +7,13 @@
             var queues = $http.get(BASE_URL + "queue"),
                 students_in_queues = $http.get(BASE_URL + "studentinqueue"),
                 users = $http.get(BASE_URL + "quser");
+            console.time("Retrieve data from server");
             $q.all([queues, students_in_queues, users]).then(function(arrayOfResults) { 
                 $scope.current_student = 3; // Nikolay Klimov 
+                console.timeEnd("Retrieve data from server");
+                console.time("Conver JSON processing");
                 $scope.prepareDataForStudent(arrayOfResults);
+                console.timeEnd("Conver JSON processing");
                 $scope.newQueue = null;
                 $scope.newTeacher = null;
             });            
@@ -108,6 +112,20 @@
                 };
             };
 
+            $scope.isAnyActiveQueue = function() {
+                if ($scope.queues) {
+                    for (var i = 0; i < $scope.queues.length; i++) {
+                        for (var j = 0; j<$scope.queues[i].students.length; i++) {
+                            if ($scope.queues[i].students[j].student_id  == $scope.current_student.id) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+                return false;
+            };
+
             $scope.isNewQueue = function() {
                 return function( item ) {
                     var show = true;
@@ -119,6 +137,23 @@
                     for (var i = 0; i < item.students.length; i++) {
                         if (item.students[i].student_id == $scope.current_student.id) {
                             show = false; 
+                        }
+                    } 
+                    return show;
+                };
+            };
+
+            $scope.hasQueues = function() {
+                return function( item ) {  
+                    var show = false;                 
+                    for (var i = 0; i < $scope.queues.length; i++) {
+                        if ($scope.queues[i].teacher_id == item.id) {
+                            show = true; 
+                        }
+                        for (var j = 0; j < $scope.queues[i].students.length; j++) {
+                            if ($scope.queues[i].students[j].student_id == $scope.current_student.id) {
+                                show = false;
+                            }
                         }
                     } 
                     return show;
@@ -175,7 +210,7 @@
         });
         $("body").on('click', ".expand-queue", function() {
 
-            $(this).parent().parent().find('table').toggle();
+            $(this).parent().parent().find('table').slideToggle();
         });
     })
 

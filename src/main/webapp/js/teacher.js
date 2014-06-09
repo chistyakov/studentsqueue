@@ -18,20 +18,61 @@
             });  
 
             $scope.createNewQueue = function(){
-
-                $scope.queues.push({
+                var queue = {
+                    name: $scope.newQueue.name,
+                    inProcess: "N",
+                    teacherId: {
+                        userId: $scope.current_teacher.id
+                    }
                     
-                })
+                };
+                $http.put(
+                    BASE_URL + 'queue',
+                    JSON.stringify(queue),
+                    {'Content-Type': 'application/json'}
+                ).success(function() {
+                    queue.teacher_id = $scope.current_teacher.id;
+                    queue.students = [];
+                    $scope.queues.push(queue);
+                }).error(function() {
+                    console.error('Something goes wrong');
+                });
             };
 
-            $scope.deleteStudentFromQueue = function(queue){
+            $scope.removeQueue = function(queue){
+                $http.delete(
+                    BASE_URL + 'queue/' + queue.id,
+                    {'Content-Type': 'application/json'}
+                ).success(function() {                 
+                    for ( var i =0; i < $scope.queues.length; i++) {
+                        if(($scope.queues[i].id == queue.id)){
+                            $scope.queues.splice(i, 1);
+                            break;
+                        }
+                    } 
+                }).error(function() {
+                    console.error('Something goes wrong');
+                }); 
+            };
 
-                for ( var i =0; i < queue.students.length; i++) {
-                    if((queue.students[i].student_id == $scope.current_student.id)){
-                        queue.students.splice(i, 1);
-                        break;
-                    }
-                } 
+            $scope.deleteStudentFromQueue = function(student){
+                $http.delete(
+                    BASE_URL + 'studentinqueue/' + student.rank,
+                    {'Content-Type': 'application/json'}
+                ).success(function() {                    
+                    for ( var i =0; i < $scope.queues.length; i++) {
+                        if(($scope.queues[i].id == student.queueId.id)){
+                            for (var j = 0; j < $scope.queues[i].students.length; j++) {
+                                if ($scope.queues[i].students[j].rank == student.rank) {
+                                    $scope.queues[i].students.splice(j, 1);
+                                    break;
+                                }
+                            }
+                        }
+                    } 
+                }).error(function() {
+                    console.error('Something goes wrong');
+                }); 
             };
 
             $scope.isMyQueue = function() {

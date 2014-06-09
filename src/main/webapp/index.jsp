@@ -11,7 +11,7 @@
 	<div ng-app='myApp'>
 		<div ng-controller="TodoCtrl" >
 			<div class='margin'>
-				<h3>This is {{current_student.realName}}'s page <i class="icon-th-list pull-right"></i></h3>
+				<h3>This is {{current_student.realName}}'s page </h3>
 			</div>
 			<hr></hr>
 			<!--
@@ -21,55 +21,59 @@
 				</div>
 			-->
 			<div>
-				<h4 class="margin">My queues:</h4>	            
-				<div class="queues">
-					<div ng-repeat="queue in queues | filter:isCurrentQueue()" class='well margin'>
-						<span ng-click='expand(queue)'>
-							<i class="expand-queue icon-large icon-angle-down"></i>
-						</span>
-						<span class="lead">{{queue.name}}</span>
-						<span class="lead">({{queue.students.length}})</span>
-						<span ng-click='deleteStudentFromQueue(queue)'>
-							<i class="icon-remove pull-right"></i>
-						</span>
-						<table class="table">
-							<tr>
-								<th>Number</th>
-								<th>Student</th>
-								<th>Group</th>
-							</tr>
-							<tr ng-repeat="item in queue.students">
-								<td ng-class="{'current': item.student_id==current_student.id}" >{{$index+1}}</td>
-								<td ng-class="{'current': item.student_id==current_student.id}">{{item.studentName}}</td>
-								<td ng-class="{'current': item.student_id==current_student.id}">{{item.groupName}}</td>
-							</tr>
-						</table>
+				<div ng-show="isAnyActiveQueue()">
+					<h4 class="margin">My queues:</h4>	            
+					<div class="queues">
+						<div ng-repeat="queue in queues | filter:isCurrentQueue()" class='well margin'>
+							<span ng-click='expand(queue)'>
+								<i class="expand-queue icon-large icon-angle-down"></i>
+							</span>
+							<span class="lead">{{queue.name}}</span>
+							<span class="lead">({{queue.students.length}})</span>
+							<span ng-click='deleteStudentFromQueue(queue)'>
+								<i class="icon-remove pull-right" title="Exit from the queue"></i>
+							</span>
+							<table class="table">
+								<tr>
+									<th>Number</th>
+									<th>Student</th>
+									<th>Group</th>
+								</tr>
+								<tr ng-repeat="item in queue.students">
+									<td ng-class="{'current': item.student_id==current_student.id}" >{{$index+1}}</td>
+									<td ng-class="{'current': item.student_id==current_student.id}">{{item.studentName}}</td>
+									<td ng-class="{'current': item.student_id==current_student.id}">{{item.groupName}}</td>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
+				
 				<div class='margin add_queue'>	
 					<div>
-						<h4>New queue</h4>     
+						<h4>Join a queue</h4>     
 						<i class="icon-plus icon-large"></i> 
 					</div>
 					<div class="add_queue_form">
 						<div>
 							<label>Select teacher</label>
 							<select class="dropdown" 
-								ng-options="item.realName for item in teachers"
+								ng-options="item.realName for item in teachers | filter:hasQueues()"
 								ng-model="newTeacher"
 								placeholder='Select teacher'
 							></select>
 						</div>
 						<div ng-show="newTeacher">
 							<div>
-								<label>Select queues</label>
+								<label>Select queue</label>
 								<select class="dropdown" 
 									ng-options="item.name for item in queues | filter:isNewQueue()"
 									ng-model="newQueue"
 									placeholder='Select queue'
-								></select>
+								>
+								</select>
 							</div>
-							<button ng-show="newQueue" class="btn add_queue_btn" ng-click='addStudentToQueue()'>Add queue</button>
+							<button ng-show="newQueue" class="btn add_queue_btn" ng-click='addStudentToQueue()'>Join the queue</button>
 						</div>						
 					</div>                     
 				</div>	           

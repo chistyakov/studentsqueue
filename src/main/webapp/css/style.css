@@ -1,6 +1,18 @@
 body {
 	padding: 0 20px 40px 20px;
+	/** To edit this background, follow this link:
+http://svgeneration.com/generate/Oriental-Roof?scale=3.3&color-1=eeeeee&fill-1=ffffff&color-2=eeeeee&fill-2=ffffff&color-3=eeeeee&fill-3=ffffff&color-4=eeeeee&fill-4=ffffff&color-5=eeeeee&fill-5=ffffff&
+*/
+background-color: #eeeeee;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nOTIuMzk5OTk5OTk5OTk5OTknIGhlaWdodD0nMTYuNSc+Cgk8ZGVmcz4KCQk8ZyBpZD0nY3VydmVzJz4KCQkJPHBhdGggZmlsbD0nI2ZmZmZmZicgc3Ryb2tlPScjZWVlZWVlJyBkPSdNMCAxMy4yYzEzLjIsMTMuMiwgMzMsMTMuMiA0Ni4xOTk5OTk5OTk5OTk5OTYsMHYtMTAwaC00Ni4xOTk5OTk5OTk5OTk5OTZ6Jy8+CgkJCTxwYXRoIGZpbGw9JyNmZmZmZmYnIHN0cm9rZT0nI2VlZWVlZScgZD0nTTAgOS44OTk5OTk5OTk5OTk5OTljMTMuMiwxMy4yLCAzMywxMy4yIDQ2LjE5OTk5OTk5OTk5OTk5NiwwJy8+CgkJCTxwYXRoIGZpbGw9JyNmZmZmZmYnIHN0cm9rZT0nI2VlZWVlZScgZD0nTTAgNi42YzEzLjIsMTMuMiwgMzMsMTMuMiA0Ni4xOTk5OTk5OTk5OTk5OTYsMCcvPgoJCQk8cGF0aCBmaWxsPScjZmZmZmZmJyBzdHJva2U9JyNlZWVlZWUnIGQ9J00wIDMuM2MxMy4yLDEzLjIsIDMzLDEzLjIgNDYuMTk5OTk5OTk5OTk5OTk2LDAnLz4KCQkJPHBhdGggZmlsbD0nI2ZmZmZmZicgc3Ryb2tlPScjZWVlZWVlJyBkPSdNMCAwYzEzLjIsMTMuMiwgMzMsMTMuMiA0Ni4xOTk5OTk5OTk5OTk5OTYsMCcvPgoJCTwvZz4KCTwvZGVmcz4KCTxyZWN0IHdpZHRoPScxMDIlJyB4PSctMSUnIHk9Jy0xJScgaGVpZ2h0PScxMDIlJyBmaWxsPScjZmZmZmZmJz48L3JlY3Q+Cgk8dXNlIHg9JzAnIHk9Jy0xLjMyJyB4bGluazpocmVmPScjY3VydmVzJyAvPgoJPHVzZSB4PSc0Ni4xOTk5OTk5OTk5OTk5OTYnIHk9Jy0xLjMyJyB4bGluazpocmVmPScjY3VydmVzJyAvPgoJPHVzZSB4PSctMjMuMDk5OTk5OTk5OTk5OTk4JyB5PSctNy45MTk5OTk5OTk5OTk5OTknIHhsaW5rOmhyZWY9JyNjdXJ2ZXMnIC8+Cgk8dXNlIHg9JzIzLjA5OTk5OTk5OTk5OTk5OCcgeT0nLTcuOTE5OTk5OTk5OTk5OTk5JyB4bGluazpocmVmPScjY3VydmVzJyAvPgoJPHVzZSB4PSc2OS4zJyB5PSctNy45MTk5OTk5OTk5OTk5OTknIHhsaW5rOmhyZWY9JyNjdXJ2ZXMnIC8+Cgk8dXNlIHg9JzAnIHk9Jy0xNy44MicgeGxpbms6aHJlZj0nI2N1cnZlcycgLz4gIAoJPHVzZSB4PSc0Ni4xOTk5OTk5OTk5OTk5OTYnIHk9Jy0xNy44MicgeGxpbms6aHJlZj0nI2N1cnZlcycgLz4KPC9zdmc+');
 
+}
+
+body, h1, h2, h3, h4, h5 {
+	font-family: "PT Sans" !important;
+}
+
+* {
+	text-shadow: 0px 2px 2px #eee;
 }
 
 i {
@@ -8,7 +20,7 @@ i {
 }
 
 .background {
-  
+  6
   background-color: #e2e2e2;
 }
 .margin { 
@@ -20,7 +32,7 @@ i {
    
 }
 .current {
-    background-color: #aaa;
+    background-color: #ddd;
 }
 
 .add_queue h4 {
@@ -33,6 +45,34 @@ i {
 }
 .add_queue .icon-plus:hover {
 	opacity: 1;
+}
+
+.table tr {
+	transition: all 0.4s;
+}
+
+hr {
+	margin: 10px;
+}
+
+.table tr:hover {
+	background-color: #eee;
+}
+.table tr:first-child:hover {
+	background-color: transparent;
+}
+
+.icon-remove {
+	transition: all 0.4s; 
+}
+
+.lead {
+	font-size: 18px;
+	margin-bottom: 5px;
+}
+
+.icon-remove:hover {
+	-webkit-transform: rotate(90deg);
 }
 
 .btn.add_queue_btn {
@@ -57,6 +97,7 @@ i {
 
 .well {
 	padding: 5px;
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
 .expand-queue {

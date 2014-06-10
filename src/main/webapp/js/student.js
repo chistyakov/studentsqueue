@@ -115,7 +115,7 @@
             $scope.isAnyActiveQueue = function() {
                 if ($scope.queues) {
                     for (var i = 0; i < $scope.queues.length; i++) {
-                        for (var j = 0; j<$scope.queues[i].students.length; i++) {
+                        for (var j = 0; j<$scope.queues[i].students.length; j++) {
                             if ($scope.queues[i].students[j].student_id  == $scope.current_student.id) {
                                 return true;
                             }

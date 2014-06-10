@@ -20,7 +20,7 @@ i {
 }
 
 .background {
-  6
+  
   background-color: #e2e2e2;
 }
 .margin { 
@@ -98,16 +98,30 @@ hr {
 .well {
 	padding: 5px;
 	box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+	cursor: pointer;
+}
+
+.ng-scope  .table 
+{
+	display: none;
+
+	transition: all 0.4s;
+}
+
+.expanded .table {
+	display: table;
 }
 
 .expand-queue {
 	margin: 0 5px;
 	cursor: pointer;
+	transition: all 0.4s;
 }
 
-.ng-scope table {
-	display: none;
+.expanded .expand-queue {
+	-webkit-transform: rotate(180deg);
 }
+
 /* Teacher's style */
 .create_queue_form {
 	display: none;

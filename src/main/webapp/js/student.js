@@ -109,7 +109,7 @@
                 ).success(function() {
                     $.pnotify({
                         type: 'success',
-                        text: "Successfully exit from the " + $scope.newQueue.name,
+                        text: "Successfully exit from the " + queue.name,
                         delay: 5000
                     });
                     for ( var i =0; i < queue.students.length; i++) {
@@ -122,7 +122,7 @@
                     console.error('Something goes wrong');
                     $.pnotify({
                         type: 'error',
-                        text: "Error while exit from the " + $scope.newQueue.name,
+                        text: "Error while exit from the " + queue.name,
                         delay: 5000
                     });
                 });

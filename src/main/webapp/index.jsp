@@ -13,6 +13,7 @@
 		<div ng-controller="TodoCtrl" >
 			<div class='margin'>
 				<h3>This is {{current_student.realName}}'s page </h3>
+				<a href="" class="logout" href="">Logout</a>
 			</div>
 			<hr></hr>
 			<!--

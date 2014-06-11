@@ -1,6 +1,7 @@
 
     var BASE_OF_BASE_URL = "http://188.226.132.225:8080/studentsqueue-1.0-SNAPSHOT/";
-    var BASE_URL = BASE_OF_BASE_URL + "webresources/studentsqueue."
+    var BASE_URL = BASE_OF_BASE_URL + "webresources/studentsqueue.";
+
     //if (window.location.hash == "#student") {
         var myApp = angular.module('myApp',[]);
 
@@ -220,6 +221,7 @@
 
             $(this).toggleClass('expanded');
         });
+        $('.logout').attr('href', BASE_URL + 'auth/logout');
     })
 
 

@@ -119,6 +119,7 @@
 
             $(this).parent().parent().find('table').toggle();
         });
+        $('.logout').attr('href', BASE_URL + 'auth/logout');
     })
 
 

@@ -132,5 +132,11 @@ hr {
 	height: 150px;
 }
 
+.logout {
+	position: absolute;
+	top: 26px;
+	right: 30px;
+}
+
 
 

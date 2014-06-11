@@ -33,10 +33,20 @@
                     JSON.stringify(queue),
                     {'Content-Type': 'application/json'}
                 ).success(function() {
+                    $.pnotify({
+                        type: 'success',
+                        text: "Successfully created " + $scope.newQueue.name,
+                        delay: 5000
+                    });
                     queue.teacher_id = $scope.current_teacher.id;
                     queue.students = [];
                     $scope.queues.push(queue);
                 }).error(function() {
+                    $.pnotify({
+                        type: 'error',
+                        text: "Error while creating " + $scope.newQueue.name,
+                        delay: 5000
+                    });
                     console.error('Something goes wrong');
                 });
             };
@@ -46,6 +56,11 @@
                     BASE_URL + 'queue/' + queue.id,
                     {'Content-Type': 'application/json'}
                 ).success(function() {                 
+                    $.pnotify({
+                        type: 'success',
+                        text: "Successfully deleted " + queue.name,
+                        delay: 5000
+                    });
                     for ( var i =0; i < $scope.queues.length; i++) {
                         if(($scope.queues[i].id == queue.id)){
                             $scope.queues.splice(i, 1);
@@ -53,6 +68,11 @@
                         }
                     } 
                 }).error(function() {
+                    $.pnotify({
+                        type: 'error',
+                        text: "Error while deleting " + queue.name,
+                        delay: 5000
+                    });
                     console.error('Something goes wrong');
                 }); 
             };
@@ -62,6 +82,11 @@
                     BASE_URL + 'studentinqueue/' + student.rank,
                     {'Content-Type': 'application/json'}
                 ).success(function() {                    
+                    $.pnotify({
+                        type: 'success',
+                        text: "Successfully rejected student " + student.studentName + " from the " + student.queueId.name,
+                        delay: 5000
+                    });
                     for ( var i =0; i < $scope.queues.length; i++) {
                         if(($scope.queues[i].id == student.queueId.id)){
                             for (var j = 0; j < $scope.queues[i].students.length; j++) {
@@ -73,6 +98,11 @@
                         }
                     } 
                 }).error(function() {
+                    $.pnotify({
+                        type: 'error',
+                        text: "Error while rejecting student " + student.studentName + " from the " + student.queueId.name,
+                        delay: 5000
+                    });
                     console.error('Something goes wrong');
                 }); 
             };

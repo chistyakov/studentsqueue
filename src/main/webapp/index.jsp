@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="lib/css/bootstrap.min.css">
 	<link rel="stylesheet" href="lib/css/font-awesome.min.css">
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="lib/css/jquery-pnotify.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -83,6 +84,7 @@
 		</div>
 	</div>
 	<script src="lib/js/jquery.js"></script>
+	<script src="lib/js/jquery-pnotify.js"></script>
 	<script src="lib/js/angular.js"></script>
 	<script src="js/converter.js"></script>
 	<script src="js/student.js"></script>

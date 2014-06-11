@@ -47,10 +47,20 @@
                         studentName: $scope.current_student.realName,
                         groupName: $scope.current_student.student.groupName,
                     });
+                    $.pnotify({
+                        type: 'success',
+                        text: "Successfully joined the " + $scope.newQueue.name,
+                        delay: 5000
+                    });
                     $scope.newQueue = null;
                     $scope.newTeacher = null;
                 }).error(function() {
                     console.error('Something goes wrong');
+                    $.pnotify({
+                        type: 'error',
+                        text: "Failed to join the queue",
+                        delay: 5000
+                    });
                 });
                 /*
                 $.ajax({
@@ -97,6 +107,11 @@
                     BASE_URL + 'studentinqueue/' + id,
                     {'Content-Type': 'application/json'}
                 ).success(function() {
+                    $.pnotify({
+                        type: 'success',
+                        text: "Successfully exit from the " + $scope.newQueue.name,
+                        delay: 5000
+                    });
                     for ( var i =0; i < queue.students.length; i++) {
                         if((queue.students[i].student_id == $scope.current_student.id)){
                             queue.students.splice(i, 1);
@@ -105,7 +120,12 @@
                     } 
                 }).error(function() {
                     console.error('Something goes wrong');
-                });               
+                    $.pnotify({
+                        type: 'error',
+                        text: "Error while exit from the " + $scope.newQueue.name,
+                        delay: 5000
+                    });
+                });
             };
 
             $scope.isCurrentQueue = function() {

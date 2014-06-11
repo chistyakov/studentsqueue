@@ -5,6 +5,7 @@
 	<title>Students Queue</title>
 	<link rel="stylesheet" href="lib/css/bootstrap.min.css">
 	<link rel="stylesheet" href="lib/css/font-awesome.min.css">
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -29,7 +30,7 @@
 								<i class="expand-queue icon-large icon-angle-down"></i>
 							</span>
 							<span class="lead">{{queue.name}}</span>
-							<span class="lead">({{queue.students.length}})</span>
+							<span class="lead">(Total students: {{queue.students.length}})</span>
 							<span ng-click='deleteStudentFromQueue(queue)'>
 								<i class="icon-remove pull-right" title="Exit from the queue"></i>
 							</span>

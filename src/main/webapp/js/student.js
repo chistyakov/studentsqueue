@@ -151,12 +151,13 @@
                     for (var i = 0; i < $scope.queues.length; i++) {
                         if ($scope.queues[i].teacher_id == item.id) {
                             show = true; 
-                        }
-                        for (var j = 0; j < $scope.queues[i].students.length; j++) {
-                            if ($scope.queues[i].students[j].student_id == $scope.current_student.id) {
-                                show = false;
+                            for (var j = 0; j < $scope.queues[i].students.length; j++) {
+                                if ($scope.queues[i].students[j].student_id == $scope.current_student.id) {
+                                    show = false;
+                                }
                             }
                         }
+                        
                     } 
                     return show;
                 };
@@ -210,9 +211,9 @@
         $(".add_queue .icon-plus").on('click', function() {
             $('.add_queue_form').slideToggle();
         });
-        $("body").on('click', ".expand-queue", function() {
+        $("body").on('click', ".well", function() {
 
-            $(this).parent().parent().find('table').slideToggle();
+            $(this).toggleClass('expanded');
         });
     })
 

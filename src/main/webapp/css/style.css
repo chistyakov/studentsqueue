@@ -71,7 +71,7 @@ hr {
 	margin-bottom: 5px;
 }
 
-.icon-remove:hover {
+.icon-remove:hover:before {
 	-webkit-transform: rotate(90deg);
 }
 

@@ -71,7 +71,7 @@ hr {
 	margin-bottom: 5px;
 }
 
-.icon-remove:hover:before {
+.icon-remove:hover {
 	-webkit-transform: rotate(90deg);
 }
 
@@ -118,7 +118,7 @@ hr {
 	transition: all 0.4s;
 }
 
-.expanded .expand-queue {
+.expanded .expand-queue:before {
 	-webkit-transform: rotate(180deg);
 }
 

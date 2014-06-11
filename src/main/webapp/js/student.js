@@ -1,15 +1,17 @@
 
-    var BASE_URL = "http://188.226.132.225:8080/studentsqueue-1.0-SNAPSHOT/webresources/studentsqueue."
+    var BASE_URL = "http://localhost:8080/studentsqueue/webresources/studentsqueue."
     //if (window.location.hash == "#student") {
         var myApp = angular.module('myApp',[]);
 
         myApp.controller('TodoCtrl', function($scope, $q, $http) {
             var queues = $http.get(BASE_URL + "queue"),
                 students_in_queues = $http.get(BASE_URL + "studentinqueue"),
-                users = $http.get(BASE_URL + "quser");
+                users = $http.get(BASE_URL + "quser"),
+                current_user = $http.get(BASE_URL + "auth/currentuser");
             console.time("Retrieve data from server");
-            $q.all([queues, students_in_queues, users]).then(function(arrayOfResults) { 
-                $scope.current_student = 3; // Nikolay Klimov 
+            $q.all([queues, students_in_queues, users, current_user]).then(function(arrayOfResults) { 
+                current_user = arrayOfResults[3].data;
+                $scope.current_student = current_user.id;
                 console.timeEnd("Retrieve data from server");
                 console.time("Conver JSON processing");
                 $scope.prepareDataForStudent(arrayOfResults);

@@ -1,5 +1,5 @@
 
-    var BASE_URL = "http://188.226.132.225:8080/studentsqueue-1.0-SNAPSHOT/webresources/studentsqueue."
+    var BASE_URL = "http://localhost:8080/studentsqueue/webresources/studentsqueue."
     //if (window.location.hash == "#student") {
         var myApp = angular.module('myApp',[]);
 

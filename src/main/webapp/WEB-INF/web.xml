@@ -33,4 +33,58 @@
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>
+    <welcome-file-list>
+        <welcome-file>/index.jsp</welcome-file>
+    </welcome-file-list>
+    <security-constraint>
+        <display-name>TestConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>TestResource</web-resource-name>
+            <description/>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>STUDENT</role-name>
+            <role-name>TEACHER</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>jdbc</realm-name>
+        <form-login-config>
+            <form-login-page>/login.html</form-login-page>
+            <form-error-page>/error.html</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>STUDENT</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>TEACHER</role-name>
+    </security-role>
+    <!--
+    <security-constraint>
+        <display-name>Basic Protection</display-name>
+        <web-resource-collection>
+            <web-resource-name>REST</web-resource-name>
+            <description/>
+            <url-pattern>/webresources/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>student</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>jdbc</realm-name>
+    </login-config>
+    <security-role>
+        <description>Student</description>
+        <role-name>student</role-name>
+    </security-role>
+    -->
 </web-app>

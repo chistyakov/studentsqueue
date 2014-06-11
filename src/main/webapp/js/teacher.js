@@ -7,9 +7,11 @@
 
             var queues = $http.get(BASE_URL + "queue"),
                 students_in_queues = $http.get(BASE_URL + "studentinqueue"),
-                users = $http.get(BASE_URL + "quser");
-            $q.all([queues, students_in_queues, users]).then(function(arrayOfResults) { 
-                $scope.current_teacher = 6; // Sergei Klimenkov 
+                users = $http.get(BASE_URL + "quser"),
+                current_user = $http.get(BASE_URL + "auth/currentuser");
+            $q.all([queues, students_in_queues, users, current_user]).then(function(arrayOfResults) { 
+                current_user = arrayOfResults[3].data;
+                $scope.current_teacher = current_user.id;
                 $scope.prepareDataForTeacher(arrayOfResults);
                 $scope.newQueue = {
                     name: null,

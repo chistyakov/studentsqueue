@@ -1,5 +1,6 @@
 
-    var BASE_URL = "http://localhost:8080/studentsqueue/webresources/studentsqueue."
+    var BASE_OF_BASE_URL = "http://localhost:8080/studentsqueue/";
+    var BASE_URL = BASE_OF_BASE_URL + "webresources/studentsqueue."
     //if (window.location.hash == "#student") {
         var myApp = angular.module('myApp',[]);
 
@@ -11,6 +12,10 @@
             console.time("Retrieve data from server");
             $q.all([queues, students_in_queues, users, current_user]).then(function(arrayOfResults) { 
                 current_user = arrayOfResults[3].data;
+                if (current_user.student === null)
+                {
+                    window.location= BASE_OF_BASE_URL + "teacher.jsp";
+                }
                 $scope.current_student = current_user.id;
                 console.timeEnd("Retrieve data from server");
                 console.time("Conver JSON processing");

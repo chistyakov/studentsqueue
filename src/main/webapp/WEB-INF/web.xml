@@ -58,12 +58,7 @@
         </form-login-config>
     </login-config>
     <security-role>
-        <description/>
-        <role-name>STUDENT</role-name>
-    </security-role>
-    <security-role>
-        <description/>
-        <role-name>TEACHER</role-name>
+        <role-name>*</role-name>
     </security-role>
     <!--
     <security-constraint>

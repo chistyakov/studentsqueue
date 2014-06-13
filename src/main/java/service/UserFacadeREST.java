@@ -33,13 +33,6 @@ public class UserFacadeREST extends AbstractFacade<User> {
         super(User.class);
     }
 
-    @POST
-    @Override
-    @Consumes({"application/json"})
-    public void create(User entity) {
-        super.create(entity);
-    }
-
     @PUT
     @Override
     @Consumes({"application/json"})

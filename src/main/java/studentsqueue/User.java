@@ -7,15 +7,16 @@ package studentsqueue;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -28,6 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "QUSER")
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="USER_ROLE")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT q FROM User q"),
@@ -61,10 +64,6 @@ public class User implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "REAL_NAME")
     private String realName;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Student student;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Teacher teacher;
 
     public User() {
     }
@@ -110,22 +109,6 @@ public class User implements Serializable {
 
     public void setRealName(String realName) {
         this.realName = realName;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
     }
 
     @Override

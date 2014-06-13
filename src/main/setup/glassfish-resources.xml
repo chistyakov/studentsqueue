@@ -5,10 +5,10 @@
         <property name="serverName" value="188.226.132.225"/>
         <property name="portNumber" value="1521"/>
         <property name="databaseName" value="XE"/>
-        <property name="User" value="studentsqueue"/>
+        <property name="User" value="newapi"/>
         <property name="Password" value="pfkthstctvvs"/>
         <property name="URL" value="jdbc:oracle:thin:@188.226.132.225:1521:XE"/>
         <property name="driverClass" value="oracle.jdbc.OracleDriver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="jdbc/oracle" object-type="user" pool-name="oracle-thin_XE_studentsqueuePool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/oracle_newapi" object-type="user" pool-name="oracle_newapiPool"/>
 </resources>

@@ -57,7 +57,7 @@ public class Queue implements Serializable {
     private Character inProcess;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "queueId")
     private Collection<StudentInQueue> studentInQueueCollection;
-    @JoinColumn(name = "TEACHER_ID", referencedColumnName = "USER_ID")
+    @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Teacher teacherId;
 

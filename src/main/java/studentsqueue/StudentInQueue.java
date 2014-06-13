@@ -47,7 +47,7 @@ public class StudentInQueue implements Serializable {
     @Size(max = 20)
     @Column(name = "DESCRIPTION")
     private String description;
-    @JoinColumn(name = "STUDENT_ID", referencedColumnName = "USER_ID")
+    @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Student studentId;
     @JoinColumn(name = "QUEUE_ID", referencedColumnName = "ID")

@@ -17,33 +17,33 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import studentsqueue.Quser;
+import studentsqueue.User;
 
 /**
  *
  * @author teamdevelopment
  */
 @Stateless
-@Path("studentsqueue.quser")
-public class QuserFacadeREST extends AbstractFacade<Quser> {
+@Path("studentsqueue.user")
+public class UserFacadeREST extends AbstractFacade<User> {
     @PersistenceContext(unitName = "com.mycompany_studentsqueue_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
-    public QuserFacadeREST() {
-        super(Quser.class);
+    public UserFacadeREST() {
+        super(User.class);
     }
 
     @POST
     @Override
     @Consumes({"application/json"})
-    public void create(Quser entity) {
+    public void create(User entity) {
         super.create(entity);
     }
 
     @PUT
     @Override
     @Consumes({"application/json"})
-    public void edit(Quser entity) {
+    public void edit(User entity) {
         super.edit(entity);
     }
 
@@ -56,21 +56,21 @@ public class QuserFacadeREST extends AbstractFacade<Quser> {
     @GET
     @Path("{id}")
     @Produces({"application/json"})
-    public Quser find(@PathParam("id") BigDecimal id) {
+    public User find(@PathParam("id") BigDecimal id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({"application/json"})
-    public List<Quser> findAll() {
+    public List<User> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/json"})
-    public List<Quser> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<User> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

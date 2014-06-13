@@ -30,18 +30,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "QUSER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Quser.findAll", query = "SELECT q FROM Quser q"),
-    @NamedQuery(name = "Quser.findById", query = "SELECT q FROM Quser q WHERE q.id = :id"),
-    @NamedQuery(name = "Quser.findByUsername", query = "SELECT q FROM Quser q WHERE q.username = :username"),
-    @NamedQuery(name = "Quser.findByPasswordHash", query = "SELECT q FROM Quser q WHERE q.passwordHash = :passwordHash"),
-    @NamedQuery(name = "Quser.findByRealName", query = "SELECT q FROM Quser q WHERE q.realName = :realName")})
-public class Quser implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT q FROM User q"),
+    @NamedQuery(name = "User.findById", query = "SELECT q FROM User q WHERE q.id = :id"),
+    @NamedQuery(name = "User.findByUsername", query = "SELECT q FROM User q WHERE q.username = :username"),
+    @NamedQuery(name = "User.findByPasswordHash", query = "SELECT q FROM User q WHERE q.passwordHash = :passwordHash"),
+    @NamedQuery(name = "User.findByRealName", query = "SELECT q FROM User q WHERE q.realName = :realName")})
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     // use allocationSize=1 because of this shit: http://stackoverflow.com/a/20267392
-    @SequenceGenerator(name="QUSER_ID_GEN", sequenceName="USERS_SEQ", allocationSize=1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="QUSER_ID_GEN")
+    @SequenceGenerator(name="USER_ID_GEN", sequenceName="USERS_SEQ", allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_ID_GEN")
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
@@ -61,19 +61,19 @@ public class Quser implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "REAL_NAME")
     private String realName;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "quser")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Student student;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "quser")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Teacher teacher;
 
-    public Quser() {
+    public User() {
     }
 
-    public Quser(BigDecimal id) {
+    public User(BigDecimal id) {
         this.id = id;
     }
 
-    public Quser(BigDecimal id, String username, String passwordHash, String realName) {
+    public User(BigDecimal id, String username, String passwordHash, String realName) {
         this.id = id;
         this.username = username;
         this.passwordHash = passwordHash;
@@ -138,10 +138,10 @@ public class Quser implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Quser)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Quser other = (Quser) object;
+        User other = (User) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

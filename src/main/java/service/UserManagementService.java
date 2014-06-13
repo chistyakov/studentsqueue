@@ -21,7 +21,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import studentsqueue.Quser;
+import studentsqueue.User;
 
 //import com.nabisoft.json.JsonResponse;
 //import com.nabisoft.model.usermanagement.Group;
@@ -52,7 +52,7 @@ public class UserManagementService {
 //            .setParameter("username", username)
 //            .getResultList();
 
-        Quser user = (Quser) em.createNamedQuery("Quser.findByUsername")
+        User user = (User) em.createNamedQuery("Quser.findByUsername")
                 .setParameter("username", username)
                 .getSingleResult();
         return Response.ok().entity(user).build();
@@ -69,7 +69,7 @@ public class UserManagementService {
 //            .setParameter("username", username)
 //            .getResultList();
 
-        Quser user = (Quser) em.createNamedQuery("Quser.findByUsername")
+        User user = (User) em.createNamedQuery("Quser.findByUsername")
                 .setParameter("username", username)
                 .getSingleResult();
         return Response.ok().entity(user.getId()).build();

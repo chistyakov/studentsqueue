@@ -47,7 +47,7 @@ public class Student implements Serializable {
     private String groupName;
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Quser quser;
+    private User user;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
     private Collection<StudentInQueue> studentInQueueCollection;
 
@@ -75,13 +75,13 @@ public class Student implements Serializable {
     }
 
     @XmlTransient
-    public Quser getQuser() {
-        return quser;
+    public User getUser() {
+        return user;
     }
 
     @XmlTransient
-    public void setQuser(Quser quser) {
-        this.quser = quser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @XmlTransient

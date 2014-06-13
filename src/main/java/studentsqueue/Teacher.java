@@ -42,7 +42,7 @@ public class Teacher implements Serializable {
     private BigDecimal userId;
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Quser quser;
+    private User user;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacherId")
     private Collection<Queue> queueCollection;
 
@@ -62,13 +62,13 @@ public class Teacher implements Serializable {
     }
 
     @XmlTransient
-    public Quser getQuser() {
-        return quser;
+    public User getUser() {
+        return user;
     }
 
     @XmlTransient
-    public void setQuser(Quser quser) {
-        this.quser = quser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @XmlTransient

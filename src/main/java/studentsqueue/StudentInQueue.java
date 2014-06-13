@@ -49,10 +49,10 @@ public class StudentInQueue implements Serializable {
     private String description;
     @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Student studentId;
+    private Student student;
     @JoinColumn(name = "QUEUE_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Queue queueId;
+    private Queue queue;
 
     public StudentInQueue() {
     }
@@ -77,20 +77,20 @@ public class StudentInQueue implements Serializable {
         this.description = description;
     }
 
-    public Student getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentId(Student studentId) {
-        this.studentId = studentId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public Queue getQueueId() {
-        return queueId;
+    public Queue getQueue() {
+        return queue;
     }
 
-    public void setQueueId(Queue queueId) {
-        this.queueId = queueId;
+    public void setQueue(Queue queue) {
+        this.queue = queue;
     }
 
     @Override

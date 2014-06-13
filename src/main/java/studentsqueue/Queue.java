@@ -55,11 +55,11 @@ public class Queue implements Serializable {
     private String name;
     @Column(name = "IN_PROCESS")
     private Character inProcess;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "queueId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "queue")
     private Collection<StudentInQueue> studentInQueueCollection;
     @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Teacher teacherId;
+    private Teacher teacher;
 
     public Queue() {
     }
@@ -106,12 +106,12 @@ public class Queue implements Serializable {
         this.studentInQueueCollection = studentInQueueCollection;
     }
 
-    public Teacher getTeacherId() {
-        return teacherId;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherId(Teacher teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     @Override

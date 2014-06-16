@@ -177,11 +177,6 @@
                     for (var i = 0; i < $scope.queues.length; i++) {
                         if ($scope.queues[i].teacher_id == item.id) {
                             show = true; 
-                            for (var j = 0; j < $scope.queues[i].students.length; j++) {
-                                if ($scope.queues[i].students[j].student_id == $scope.current_student.id) {
-                                    show = false;
-                                }
-                            }
                         }
                         
                     } 

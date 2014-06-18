@@ -17,6 +17,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import studentsqueue.Queue;
 import studentsqueue.Student;
 import studentsqueue.StudentInQueue;
 
@@ -85,12 +86,12 @@ public class StudentFacadeREST extends AbstractFacade<Student> {
     @GET
     @Path("{studentId}/queues")
     @Produces({"application/json"})
-    public List<StudentInQueue> getQueuesByStudnet(@PathParam("studentId") BigDecimal studentId) {
-        List<StudentInQueue> studentInQueueList = em
+    public List<Queue> getQueuesByStudnet(@PathParam("studentId") BigDecimal studentId) {
+        List<Queue> queues = em
                 .createNamedQuery("Student.getQueuesByStudent")
                 .setParameter("studentId", studentId)
                 .getResultList();
-        return studentInQueueList;
+        return queues;
     }
 
     @Override

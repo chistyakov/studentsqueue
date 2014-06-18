@@ -76,7 +76,7 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
         return String.valueOf(super.count());
     }
 
-    @PUT
+    @POST
     @Path("queue/{queueId}/student/{studentId}")
     @Consumes({"text/plain"})
     public void addStudentToQueue(String description, @PathParam("queueId") BigDecimal queueId,

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,6 +18,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import studentsqueue.Queue;
+import studentsqueue.Student;
 import studentsqueue.StudentInQueue;
 
 /**
@@ -26,6 +29,7 @@ import studentsqueue.StudentInQueue;
 @Stateless
 @Path("studentsqueue.studentinqueue")
 public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
+
     @PersistenceContext(unitName = "com.mycompany_studentsqueue_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -81,9 +85,47 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
         return String.valueOf(super.count());
     }
 
+    @PUT
+    @Path("queue/{queueId}/student/{studentId}")
+    @Consumes({"text/plain"})
+    public void addStudentToQueue(String description, @PathParam("queueId") BigDecimal queueId,
+            @PathParam("studentId") BigDecimal studentId) {
+        
+        Queue queue = (Queue) em.createNamedQuery("Queue.findById")
+                .setParameter("id", queueId)
+                .getSingleResult();
+        Student student = (Student) em.createNamedQuery("Student.findById")
+                .setParameter("id", studentId)
+                .getSingleResult();
+        StudentInQueue studentInQueue = new StudentInQueue();
+        studentInQueue.setQueue(queue);
+        studentInQueue.setStudent(student);
+        studentInQueue.setDescription(description);
+        queue.getStudentInQueueList().add(studentInQueue);
+        em.persist(queue);
+    }
+
+    @DELETE
+    @Path("queue/{queueId}/student/{studentId}")
+    @Consumes({"application/json"})
+    public void deleteStudentFromQueue(@PathParam("queueId") BigDecimal queueId,
+            @PathParam("studentId") BigDecimal studentId) {
+
+        Queue queue = (Queue) em.createNamedQuery("Queue.findById")
+                .setParameter("id", queueId)
+                .getSingleResult();
+        StudentInQueue studentInQueue = (StudentInQueue) em.createNamedQuery("StudentInQueue.findByStudentIdAndQueueId")
+                .setParameter("queueId", queueId)
+                .setParameter("studentId", studentId)
+                .getSingleResult();
+        int index = queue.getStudentInQueueList().indexOf(studentInQueue);
+        queue.getStudentInQueueList().remove(index);
+        em.remove(studentInQueue);
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

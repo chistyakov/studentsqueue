@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "StudentInQueue.findAll", query = "SELECT s FROM StudentInQueue s"),
-    @NamedQuery(name = "StudentInQueue.findByRank", query = "SELECT s FROM StudentInQueue s WHERE s.rank = :rank"),
+    @NamedQuery(name = "StudentInQueue.findById", query = "SELECT s FROM StudentInQueue s WHERE s.id = :id"),
+    @NamedQuery(name = "StudentInQueue.findByStudentIdAndQueueId", query = "SELECT s FROM StudentInQueue s WHERE s.queue.id = :queueId AND s.student.id = :studentId"),
     @NamedQuery(name = "StudentInQueue.findByDescription", query = "SELECT s FROM StudentInQueue s WHERE s.description = :description")})
 public class StudentInQueue implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -42,8 +44,18 @@ public class StudentInQueue implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="RANK_GEN")
     @Basic(optional = false)
     @NotNull
+    @Column(name = "ID")
+    private BigDecimal id;
     @Column(name = "RANK")
     private BigDecimal rank;
+
+    public BigDecimal getRank() {
+        return rank;
+    }
+
+    public void setRank(BigDecimal rank) {
+        this.rank = rank;
+    }
     @Size(max = 20)
     @Column(name = "DESCRIPTION")
     private String description;
@@ -57,16 +69,16 @@ public class StudentInQueue implements Serializable {
     public StudentInQueue() {
     }
 
-    public StudentInQueue(BigDecimal rank) {
-        this.rank = rank;
+    public StudentInQueue(BigDecimal id) {
+        this.id = id;
     }
 
-    public BigDecimal getRank() {
-        return rank;
+    public BigDecimal getId() {
+        return id;
     }
 
-    public void setRank(BigDecimal rank) {
-        this.rank = rank;
+    public void setId(BigDecimal id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -84,11 +96,13 @@ public class StudentInQueue implements Serializable {
     public void setStudent(Student student) {
         this.student = student;
     }
-
+    
+    @XmlTransient
     public Queue getQueue() {
         return queue;
     }
 
+    @XmlTransient
     public void setQueue(Queue queue) {
         this.queue = queue;
     }
@@ -96,7 +110,7 @@ public class StudentInQueue implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (rank != null ? rank.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -107,7 +121,7 @@ public class StudentInQueue implements Serializable {
             return false;
         }
         StudentInQueue other = (StudentInQueue) object;
-        if ((this.rank == null && other.rank != null) || (this.rank != null && !this.rank.equals(other.rank))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -115,7 +129,7 @@ public class StudentInQueue implements Serializable {
 
     @Override
     public String toString() {
-        return "studentsqueue.StudentInQueue[ rank=" + rank + " ]";
+        return "studentsqueue.StudentInQueue[ rank=" + id + " ]";
     }
     
 }

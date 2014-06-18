@@ -10,6 +10,9 @@ import javax.persistence.Table;
 @DiscriminatorValue("T")
 @Table(name = "TEACHER")
 @NamedQueries({
-    @NamedQuery(name = "Teacher.getQueuesByTeacher", query = "SELECT q FROM Queue q WHERE q.teacher.id = :teacherId")})
+    @NamedQuery(name = "Teacher.getQueuesByTeacher", query = "SELECT q FROM Queue q WHERE q.teacher.id = :teacherId"),
+    @NamedQuery(name = "Teacher.startProcessQueue", query = "UPDATE Queue q SET q.inProcess = 'Y' WHERE q.id = :queueId"),
+    @NamedQuery(name = "Teacher.pauseProcessQueue", query = "UPDATE Queue q SET q.inProcess = 'N' WHERE q.id = :queueId")
+})
 public class Teacher extends User {
 }

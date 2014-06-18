@@ -84,7 +84,23 @@ public class TeacherFacadeREST extends AbstractFacade<Teacher> {
                 .getResultList();
         return queues;
     }
-
+    
+    @PUT
+    @Path("startprocessqueue/{queueId}")
+    public void startProcessQueue(@PathParam("queueId") BigDecimal queueId) {
+        em.createNamedQuery("Teacher.startProcessQueue")
+                .setParameter("queueId", queueId)
+                .executeUpdate();
+    }
+    
+    @PUT
+    @Path("pauseprocessqueue/{queueId}")
+    public void pauseProcessQueue(@PathParam("queueId") BigDecimal queueId) {
+        em.createNamedQuery("Teacher.pauseProcessQueue")
+                .setParameter("queueId", queueId)
+                .executeUpdate();
+    }
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;

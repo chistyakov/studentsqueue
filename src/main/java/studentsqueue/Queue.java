@@ -46,10 +46,11 @@ public class Queue implements Serializable {
     @Column(name = "NAME")
     private String name;
     @Column(name = "IN_PROCESS")
-    private Character inProcess;
+    private Character inProcess = 'N';
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "queue")
     @OrderColumn(name="RANK")
     private List<StudentInQueue> studentInQueueList;
+    @NotNull
     @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Teacher teacher;

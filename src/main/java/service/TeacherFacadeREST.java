@@ -17,6 +17,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import studentsqueue.Queue;
 import studentsqueue.Teacher;
 
 /**
@@ -79,6 +80,17 @@ public class TeacherFacadeREST extends AbstractFacade<Teacher> {
     @Produces("text/plain")
     public String countREST() {
         return String.valueOf(super.count());
+    }
+        
+    @GET
+    @Path("{teacherId}/queues")
+    @Produces({"application/json"})
+    public List<Queue> getQueuesByStudnet(@PathParam("teacherId") BigDecimal teacherId) {
+        List<Queue> queues = em
+                .createNamedQuery("Teacher.getQueuesByTeacher")
+                .setParameter("teacherId", teacherId)
+                .getResultList();
+        return queues;
     }
 
     @Override

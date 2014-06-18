@@ -90,13 +90,9 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
     @Consumes({"text/plain"})
     public void addStudentToQueue(String description, @PathParam("queueId") BigDecimal queueId,
             @PathParam("studentId") BigDecimal studentId) {
-        
-        Queue queue = (Queue) em.createNamedQuery("Queue.findById")
-                .setParameter("id", queueId)
-                .getSingleResult();
-        Student student = (Student) em.createNamedQuery("Student.findById")
-                .setParameter("id", studentId)
-                .getSingleResult();
+
+        Queue queue = getQueueById(queueId);
+        Student student = getStudentById(studentId);
         StudentInQueue studentInQueue = new StudentInQueue();
         studentInQueue.setQueue(queue);
         studentInQueue.setStudent(student);
@@ -105,22 +101,65 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
         em.persist(queue);
     }
 
+    private Student getStudentById(BigDecimal studentId) {
+        Student student = (Student) em.createNamedQuery("Student.findById")
+                .setParameter("id", studentId)
+                .getSingleResult();
+        return student;
+    }
+
     @DELETE
     @Path("queue/{queueId}/student/{studentId}")
-    @Consumes({"application/json"})
-    public void deleteStudentFromQueue(@PathParam("queueId") BigDecimal queueId,
+    public void deleteStudentFromQueueByStudentId(
+            @PathParam("queueId") BigDecimal queueId,
             @PathParam("studentId") BigDecimal studentId) {
 
-        Queue queue = (Queue) em.createNamedQuery("Queue.findById")
-                .setParameter("id", queueId)
-                .getSingleResult();
-        StudentInQueue studentInQueue = (StudentInQueue) em.createNamedQuery("StudentInQueue.findByStudentIdAndQueueId")
+        Queue queue = getQueueById(queueId);
+
+        StudentInQueue studentInQueue = getStudentInQueueByStudentIdAndQueueId(queueId,
+                studentId);
+        queue.getStudentInQueueList().remove(studentInQueue);
+        em.remove(studentInQueue);
+    }
+
+    private StudentInQueue getStudentInQueueByStudentIdAndQueueId(BigDecimal queueId,
+            BigDecimal studentId) {
+        StudentInQueue studentInQueue = (StudentInQueue) em
+                .createNamedQuery("StudentInQueue.findByStudentIdAndQueueId")
                 .setParameter("queueId", queueId)
                 .setParameter("studentId", studentId)
                 .getSingleResult();
-        int index = queue.getStudentInQueueList().indexOf(studentInQueue);
-        queue.getStudentInQueueList().remove(index);
+        return studentInQueue;
+    }
+
+    @DELETE
+    @Path("queue/{queueId}/rank/{rank}")
+    public void deleteStudentFromQueueByRank(
+            @PathParam("queueId") BigDecimal queueId,
+            @PathParam("rank") BigDecimal rank) {
+
+        Queue queue = getQueueById(queueId);
+        StudentInQueue studentInQueue = getStudentInQueueByStudentIdAndRank(
+                queueId, rank);
+        queue.getStudentInQueueList().remove(studentInQueue);
         em.remove(studentInQueue);
+    }
+
+    private Queue getQueueById(BigDecimal queueId) {
+        Queue queue = (Queue) em.createNamedQuery("Queue.findById")
+                .setParameter("id", queueId)
+                .getSingleResult();
+        return queue;
+    }
+    
+    private StudentInQueue getStudentInQueueByStudentIdAndRank(BigDecimal queueId,
+            BigDecimal rank) {
+        StudentInQueue studentInQueue = (StudentInQueue) em
+                .createNamedQuery("StudentInQueue.findByStudentIdAndRank")
+                .setParameter("queueId", queueId)
+                .setParameter("rank", rank)
+                .getSingleResult();
+        return studentInQueue;
     }
 
     @Override

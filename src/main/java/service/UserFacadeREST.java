@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import java.math.BigDecimal;
@@ -12,17 +8,12 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import studentsqueue.User;
 
-/**
- *
- * @author teamdevelopment
- */
 @Stateless
 @Path("studentsqueue.user")
 public class UserFacadeREST extends AbstractFacade<User> {
@@ -78,5 +69,4 @@ public class UserFacadeREST extends AbstractFacade<User> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
 }

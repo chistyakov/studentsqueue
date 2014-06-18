@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package studentsqueue;
 
 import java.io.Serializable;
@@ -23,10 +19,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author teamdevelopment
- */
 @Entity
 @Table(name = "QUSER")
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -135,5 +127,4 @@ public class User implements Serializable {
     public String toString() {
         return "studentsqueue.Quser[ id=" + id + " ]";
     }
-    
 }

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import java.math.BigDecimal;
@@ -20,10 +16,6 @@ import javax.ws.rs.Produces;
 import studentsqueue.Queue;
 import studentsqueue.Teacher;
 
-/**
- *
- * @author teamdevelopment
- */
 @Stateless
 @Path("studentsqueue.teacher")
 public class TeacherFacadeREST extends AbstractFacade<Teacher> {
@@ -97,5 +89,4 @@ public class TeacherFacadeREST extends AbstractFacade<Teacher> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
 }

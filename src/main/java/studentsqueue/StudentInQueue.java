@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package studentsqueue;
 
 import java.io.Serializable;
@@ -23,10 +19,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author teamdevelopment
- */
 @Entity
 @Table(name = "STUDENT_IN_QUEUE")
 @XmlRootElement
@@ -133,5 +125,4 @@ public class StudentInQueue implements Serializable {
     public String toString() {
         return "studentsqueue.StudentInQueue[ rank=" + id + " ]";
     }
-    
 }

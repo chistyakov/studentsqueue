@@ -44,5 +44,4 @@ public class Student extends User {
     public void setStudentInQueueList(List<StudentInQueue> studentInQueueList) {
         this.studentInQueueList = studentInQueueList;
     }
-
 }

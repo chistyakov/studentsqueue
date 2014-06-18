@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import java.math.BigDecimal;
@@ -9,7 +5,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,10 +17,6 @@ import studentsqueue.Queue;
 import studentsqueue.Student;
 import studentsqueue.StudentInQueue;
 
-/**
- *
- * @author teamdevelopment
- */
 @Stateless
 @Path("studentsqueue.studentinqueue")
 public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
@@ -180,5 +171,4 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
 }

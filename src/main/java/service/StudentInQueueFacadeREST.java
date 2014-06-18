@@ -79,7 +79,8 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
     @POST
     @Path("queue/{queueId}/student/{studentId}")
     @Consumes({"text/plain"})
-    public void addStudentToQueue(String description, @PathParam("queueId") BigDecimal queueId,
+    @Produces({"application/json"})
+    public StudentInQueue addStudentToQueue(String description, @PathParam("queueId") BigDecimal queueId,
             @PathParam("studentId") BigDecimal studentId) {
 
         Queue queue = getQueueById(queueId);
@@ -90,6 +91,7 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
         studentInQueue.setDescription(description);
         queue.getStudentInQueueList().add(studentInQueue);
         em.persist(queue);
+        return studentInQueue;
     }
 
     private Student getStudentById(BigDecimal studentId) {

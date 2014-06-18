@@ -19,6 +19,7 @@ import studentsqueue.Teacher;
 @Stateless
 @Path("studentsqueue.teacher")
 public class TeacherFacadeREST extends AbstractFacade<Teacher> {
+
     @PersistenceContext(unitName = "com.mycompany_studentsqueue_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -73,7 +74,7 @@ public class TeacherFacadeREST extends AbstractFacade<Teacher> {
     public String countREST() {
         return String.valueOf(super.count());
     }
-        
+
     @GET
     @Path("{teacherId}/queues")
     @Produces({"application/json"})
@@ -84,23 +85,33 @@ public class TeacherFacadeREST extends AbstractFacade<Teacher> {
                 .getResultList();
         return queues;
     }
-    
+
     @PUT
     @Path("startprocessqueue/{queueId}")
-    public void startProcessQueue(@PathParam("queueId") BigDecimal queueId) {
+    @Produces({"application/json"})
+    public Queue startProcessQueue(@PathParam("queueId") BigDecimal queueId) {
         em.createNamedQuery("Teacher.startProcessQueue")
                 .setParameter("queueId", queueId)
                 .executeUpdate();
+        Queue queue = (Queue) em.createNamedQuery("Queue.findById")
+                .setParameter("queueId", queueId)
+                .getSingleResult();
+        return queue;
     }
-    
+
     @PUT
     @Path("pauseprocessqueue/{queueId}")
-    public void pauseProcessQueue(@PathParam("queueId") BigDecimal queueId) {
+    @Produces({"application/json"})
+    public Queue pauseProcessQueue(@PathParam("queueId") BigDecimal queueId) {
         em.createNamedQuery("Teacher.pauseProcessQueue")
                 .setParameter("queueId", queueId)
                 .executeUpdate();
+        Queue queue = (Queue) em.createNamedQuery("Queue.findById")
+                .setParameter("queueId", queueId)
+                .getSingleResult();
+        return queue;
     }
-    
+
     @Override
     protected EntityManager getEntityManager() {
         return em;

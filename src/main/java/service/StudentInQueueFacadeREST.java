@@ -151,7 +151,7 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
                 .getSingleResult();
         return queue;
     }
-    
+
     private StudentInQueue getStudentInQueueByStudentIdAndRank(BigDecimal queueId,
             BigDecimal rank) {
         StudentInQueue studentInQueue = (StudentInQueue) em
@@ -160,6 +160,20 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
                 .setParameter("rank", rank)
                 .getSingleResult();
         return studentInQueue;
+    }
+
+    @GET
+    @Path("queue/{queueId}/student/{studentId}")
+    @Produces("text/plain")
+    public String getStudentRankInQueue(
+            @PathParam("queueId") BigDecimal queueId,
+            @PathParam("studentId") BigDecimal studentId) {
+        BigDecimal rank = (BigDecimal) em
+                .createNamedQuery("StudentInQueue.getStudentRankInQueue")
+                .setParameter("queueId", queueId)
+                .setParameter("studentId", studentId)
+                .getSingleResult();
+        return String.valueOf(rank);
     }
 
     @Override

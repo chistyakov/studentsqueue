@@ -30,26 +30,19 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "StudentInQueue.getStudentRankInQueue", query = "SELECT s.rank FROM StudentInQueue s WHERE s.queue.id = :queueId AND s.student.id = :studentId"),
     @NamedQuery(name = "StudentInQueue.findByDescription", query = "SELECT s FROM StudentInQueue s WHERE s.description = :description")})
 public class StudentInQueue implements Serializable {
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     // use allocationSize=1 because of this shit: http://stackoverflow.com/a/20267392
-    @SequenceGenerator(name="RANK_GEN", sequenceName="STUDENT_IN_QUEUE_RANK_SEQ", allocationSize=1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="RANK_GEN")
+    @SequenceGenerator(name = "RANK_GEN", sequenceName = "STUDENT_IN_QUEUE_RANK_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RANK_GEN")
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
     private BigDecimal id;
     @Column(name = "RANK")
     private BigDecimal rank;
-
-    public BigDecimal getRank() {
-        return rank;
-    }
-
-    public void setRank(BigDecimal rank) {
-        this.rank = rank;
-    }
     @Size(max = 20)
     @Column(name = "DESCRIPTION")
     private String description;
@@ -65,6 +58,14 @@ public class StudentInQueue implements Serializable {
 
     public StudentInQueue(BigDecimal id) {
         this.id = id;
+    }
+
+    public BigDecimal getRank() {
+        return rank;
+    }
+
+    public void setRank(BigDecimal rank) {
+        this.rank = rank;
     }
 
     public BigDecimal getId() {
@@ -90,7 +91,7 @@ public class StudentInQueue implements Serializable {
     public void setStudent(Student student) {
         this.student = student;
     }
-    
+
     @XmlTransient
     public Queue getQueue() {
         return queue;

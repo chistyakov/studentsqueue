@@ -91,6 +91,7 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
         studentInQueue.setDescription(description);
         queue.getStudentInQueueList().add(studentInQueue);
         em.persist(queue);
+        em.flush();
         return studentInQueue;
     }
 

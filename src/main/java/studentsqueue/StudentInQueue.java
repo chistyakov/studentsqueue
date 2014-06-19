@@ -60,20 +60,20 @@ public class StudentInQueue implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getRank() {
-        return rank;
-    }
-
-    public void setRank(BigDecimal rank) {
-        this.rank = rank;
-    }
-
     public BigDecimal getId() {
         return id;
     }
 
     public void setId(BigDecimal id) {
         this.id = id;
+    }
+
+    public BigDecimal getRank() {
+        return rank;
+    }
+
+    public void setRank(BigDecimal rank) {
+        this.rank = rank;
     }
 
     public String getDescription() {

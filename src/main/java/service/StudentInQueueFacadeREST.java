@@ -90,8 +90,9 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
         studentInQueue.setStudent(student);
         studentInQueue.setDescription(description);
         queue.getStudentInQueueList().add(studentInQueue);
-        em.persist(queue);
         em.flush();
+        em.refresh(studentInQueue);
+        em.persist(queue);
         return studentInQueue;
     }
 
@@ -114,6 +115,7 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
                 studentId);
         queue.getStudentInQueueList().remove(studentInQueue);
         em.remove(studentInQueue);
+        em.getEntityManagerFactory().getCache().evictAll();
     }
 
     private StudentInQueue getStudentInQueueByStudentIdAndQueueId(BigDecimal queueId,
@@ -137,6 +139,7 @@ public class StudentInQueueFacadeREST extends AbstractFacade<StudentInQueue> {
                 queueId, rank);
         queue.getStudentInQueueList().remove(studentInQueue);
         em.remove(studentInQueue);
+        em.getEntityManagerFactory().getCache().evictAll();
     }
 
     private Queue getQueueById(BigDecimal queueId) {

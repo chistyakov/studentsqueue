@@ -46,7 +46,7 @@ public class User implements Serializable {
     @Column(name = "USERNAME")
     private String username;
     @Basic(optional = false)
-    @Size(min = 1, max = 20)
+    @Size(min = 64, max = 64)
     @NotNull
     @Column(name = "PASSWORD_HASH")
     @XmlTransient

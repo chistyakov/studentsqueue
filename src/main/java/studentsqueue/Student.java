@@ -9,6 +9,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
@@ -21,6 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Student.findByPasswordHash", query = "SELECT q FROM Student q WHERE q.passwordHash = :passwordHash"),
     @NamedQuery(name = "Student.findByRealName", query = "SELECT q FROM Student q WHERE q.realName = :realName"),
     @NamedQuery(name = "Student.getQueuesByStudent", query = "SELECT q FROM Queue q INNER JOIN q.studentInQueueList sq WHERE sq.student.id = :studentId")})
+@XmlRootElement
 public class Student extends User {
     @Column(name = "GROUP_NAME")
     private String groupName;

@@ -17,14 +17,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+@XmlTransient
 @Entity
 @Table(name = "QUSER")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="USER_ROLE")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT q FROM User q"),
     @NamedQuery(name = "User.findById", query = "SELECT q FROM User q WHERE q.id = :id"),
@@ -39,18 +38,18 @@ public class User implements Serializable {
     @SequenceGenerator(name="USER_ID_GEN", sequenceName="USERS_SEQ", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_ID_GEN")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID")
     private BigDecimal id;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 20)
+    @NotNull
     @Column(name = "USERNAME")
     private String username;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 20)
+    @NotNull
     @Column(name = "PASSWORD_HASH")
+    @XmlTransient
     private String passwordHash;
     @Basic(optional = false)
     @NotNull

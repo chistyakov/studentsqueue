@@ -94,8 +94,9 @@ public class TeacherFacadeREST extends AbstractFacade<Teacher> {
                 .setParameter("queueId", queueId)
                 .executeUpdate();
         Queue queue = (Queue) em.createNamedQuery("Queue.findById")
-                .setParameter("queueId", queueId)
+                .setParameter("id", queueId)
                 .getSingleResult();
+        em.refresh(queue);
         return queue;
     }
 
@@ -107,8 +108,9 @@ public class TeacherFacadeREST extends AbstractFacade<Teacher> {
                 .setParameter("queueId", queueId)
                 .executeUpdate();
         Queue queue = (Queue) em.createNamedQuery("Queue.findById")
-                .setParameter("queueId", queueId)
+                .setParameter("id", queueId)
                 .getSingleResult();
+        em.refresh(queue);
         return queue;
     }
 

@@ -34,7 +34,7 @@ public class UserManagementService {
     public Response getCurrentUser(@Context HttpServletRequest req) {
 
         String username = req.getUserPrincipal().getName();
-        User user = (User) em.createNamedQuery("Quser.findByUsername")
+        User user = (User) em.createNamedQuery("User.findByUsername")
                 .setParameter("username", username)
                 .getSingleResult();
         return Response.ok().entity(user).build();
@@ -46,7 +46,7 @@ public class UserManagementService {
     public Response getCurrentUserId(@Context HttpServletRequest req) {
 
         String username = req.getUserPrincipal().getName();
-        User user = (User) em.createNamedQuery("Quser.findByUsername")
+        User user = (User) em.createNamedQuery("User.findByUsername")
                 .setParameter("username", username)
                 .getSingleResult();
         return Response.ok().entity(user.getId()).build();

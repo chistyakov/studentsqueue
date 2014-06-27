@@ -3,6 +3,7 @@ function prepareData(arrayOfObject) {
         students_in_queues = arrayOfObject[1].data,
         users = arrayOfObject[2].data;
     try {
+        return queues;
         for (var i = 0; i < users.length; i++) {
             // set students's names
             for (var j = 0; j < students_in_queues.length; j++) {

@@ -9,16 +9,15 @@
             var queues = $http.get(BASE_URL + "queue"),
                 teachers = $http.get(BASE_URL + "teacher"),
                 users = $http.get(BASE_URL + "user");
-               // current_user = $http.get(BASE_URL + "auth/currentuserid");
+                current_user = $http.get(BASE_URL + "auth/currentuserid");
             console.time("Retrieve data from server");
-            $q.all([queues, teachers, users/*, current_user*/]).then(function(arrayOfResults) { 
-                //current_user = arrayOfResults[3].data;
-                current_user = 3; // Klimov, remove on production
+            $q.all([queues, teachers, users, current_user]).then(function(arrayOfResults) { 
+                current_user = arrayOfResults[3].data;
                 if (current_user.student === null)
                 {
                     window.location= BASE_OF_BASE_URL + "teacher.jsp";
                 }
-                $scope.current_student = current_user;
+                $scope.current_student = current_user.id;
                 console.timeEnd("Retrieve data from server");
                 console.time("Convert JSON processing");
                 $scope.prepareDataForStudent(arrayOfResults);

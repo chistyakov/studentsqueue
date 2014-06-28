@@ -182,6 +182,15 @@
 
             $(this).parent().parent().find('table').toggle();
         });
+        $("body").on('click', ".logout", function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function() {
+                    window.location= BASE_OF_BASE_URL + "login.html";
+                }
+            })
+        });
         $('.logout').attr('href', BASE_URL + 'auth/logout');
     })
 

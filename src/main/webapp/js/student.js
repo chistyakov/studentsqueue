@@ -9,15 +9,14 @@
             var queues = $http.get(BASE_URL + "queue"),
                 teachers = $http.get(BASE_URL + "teacher"),
                 users = $http.get(BASE_URL + "user");
-                current_user = $http.get(BASE_URL + "auth/currentuserid");
+                current_user = $http.get(BASE_URL + "auth/currentuser");
             console.time("Retrieve data from server");
             $q.all([queues, teachers, users, current_user]).then(function(arrayOfResults) { 
-                current_user = arrayOfResults[3].data;
+                $scope.current_student = arrayOfResults[3].data;
                 if (current_user.student === null)
                 {
                     window.location= BASE_OF_BASE_URL + "teacher.jsp";
                 }
-                $scope.current_student = current_user.id;
                 console.timeEnd("Retrieve data from server");
                 console.time("Convert JSON processing");
                 $scope.prepareDataForStudent(arrayOfResults);
@@ -187,13 +186,14 @@
 
                 var teachers = arrayOfObject[1].data,
                     users = arrayOfObject[2].data;
-                
+                /*
                 for (var i = 0; i < users.length; i++) {   
                     // set current student param                    
                     if (users[i].id == $scope.current_student) {
                         $scope.current_student = users[i];
                     }  
                 }
+                */
                 for (var i = 0; i < teachers.length; i++) { 
                     teachers[i].queues = [];  
                     for (var j = 0; j < queues.length; j++) {   

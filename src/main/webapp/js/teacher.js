@@ -40,15 +40,13 @@
                     BASE_URL + 'queue',
                     JSON.stringify(queue),
                     {'Content-Type': 'application/json'}
-                ).success(function() {
+                ).success(function(data) {
                     $.pnotify({
                         type: 'success',
-                        text: "Successfully created " + $scope.newQueue.name,
+                        text: "Successfully created " + data.name,
                         delay: 5000
                     });
-                    queue.teacher.id = $scope.current_teacher.id;
-                    queue.studentInQueueList = [];
-                    $scope.queues.push(queue);
+                    $scope.queues.push(data);
                 }).error(function() {
                     $.pnotify({
                         type: 'error',

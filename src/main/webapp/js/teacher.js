@@ -8,7 +8,7 @@
 
             $http.get(BASE_URL + "auth/currentuser").success(function(data) {
                 current_user = data; 
-                var queues = $http.get(BASE_URL + "teacher/" + current_user + "/queues");
+                var queues = $http.get(BASE_URL + "teacher/" + current_user.id + "/queues");
                     users = $http.get(BASE_URL + "user");
                     //current_user = $http.get(BASE_URL + "auth/currentuser");
                 $q.all([queues, users]).then(function(arrayOfResults) { 

@@ -229,8 +229,9 @@
                 success: function() {
                     window.location= BASE_OF_BASE_URL + "login.html";
                 }
-				window.location= BASE_OF_BASE_URL + "login.html";
-            })
+				
+            });
+			window.location= BASE_OF_BASE_URL + "login.html";
         });
         $('.logout').attr('href', BASE_URL + 'auth/logout');
     })

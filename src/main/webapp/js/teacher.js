@@ -36,7 +36,7 @@
                         id: $scope.current_teacher.id
                     }                    
                 };
-                $http.put(
+                $http.post(
                     BASE_URL + 'queue',
                     JSON.stringify(queue),
                     {'Content-Type': 'application/json'}

@@ -6,9 +6,20 @@
 
         myApp.controller('TodoCtrl', function($scope, $q, $http) {
 
-/*
-            $http.get(BASE_URL + "auth/currentuser").success(function() {
-                
+            $http.get(BASE_URL + "auth/currentuser").success(function(data) {
+                current_user = data.id; 
+                var queues = $http.get(BASE_URL + "teacher/" + current_user + "/queues");
+                    users = $http.get(BASE_URL + "user");
+                    //current_user = $http.get(BASE_URL + "auth/currentuser");
+                $q.all([queues, users]).then(function(arrayOfResults) { 
+                    //current_user = arrayOfResults[3].data;
+                    $scope.current_teacher = current_user;
+                    $scope.prepareDataForTeacher(arrayOfResults);
+                    $scope.newQueue = {
+                        name: null,
+                        desc: null
+                    };
+                });  
             }).error(function() {
                 $.pnotify({
                     type: 'error',
@@ -16,20 +27,7 @@
                     delay: 5000
                 });
             });
-*/
-            current_user = 6; // Klimenkov
-            var queues = $http.get(BASE_URL + "teacher/" + current_user + "/queues");
-                users = $http.get(BASE_URL + "user");
-                //current_user = $http.get(BASE_URL + "auth/currentuser");
-            $q.all([queues, users]).then(function(arrayOfResults) { 
-                //current_user = arrayOfResults[3].data;
-                $scope.current_teacher = current_user;
-                $scope.prepareDataForTeacher(arrayOfResults);
-                $scope.newQueue = {
-                    name: null,
-                    desc: null
-                };
-            });  
+            
 
             $scope.createNewQueue = function(){
                 var queue = {

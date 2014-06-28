@@ -17,7 +17,7 @@
                 {
                     window.location= BASE_OF_BASE_URL + "teacher.jsp";
                 }
-                $scope.current_student = current_user.id;
+                $scope.current_student = current_user;
                 console.timeEnd("Retrieve data from server");
                 console.time("Convert JSON processing");
                 $scope.prepareDataForStudent(arrayOfResults);

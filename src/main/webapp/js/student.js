@@ -13,7 +13,7 @@
             console.time("Retrieve data from server");
             $q.all([queues, teachers, users, current_user]).then(function(arrayOfResults) { 
                 $scope.current_student = arrayOfResults[3].data;
-                if (!$scope.current_student.group)
+                if (!$scope.current_student.groupName)
                 {
                     window.location= BASE_OF_BASE_URL + "teacher.jsp";
                 }

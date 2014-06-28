@@ -17,7 +17,7 @@
                 {
                     window.location= BASE_OF_BASE_URL + "teacher.jsp";
                 }
-                $scope.current_student = current_user;
+                $scope.current_student = current_user.id;
                 console.timeEnd("Retrieve data from server");
                 console.time("Convert JSON processing");
                 $scope.prepareDataForStudent(arrayOfResults);
@@ -190,7 +190,7 @@
                 
                 for (var i = 0; i < users.length; i++) {   
                     // set current student param                    
-                    if (users[i].id === $scope.current_student) {
+                    if (users[i].id == $scope.current_student) {
                         $scope.current_student = users[i];
                     }  
                 }

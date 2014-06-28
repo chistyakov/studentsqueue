@@ -26,10 +26,13 @@ public class QueueFacadeREST extends AbstractFacade<Queue> {
     }
 
     @POST
-    @Override
     @Consumes({"application/json"})
-    public void create(Queue entity) {
+    @Produces({"application/json"})
+    public Queue createQueue(Queue entity) {
         super.create(entity);
+        em.flush();
+        em.refresh(entity);
+        return entity;
     }
 
     @PUT

@@ -7,7 +7,7 @@
         myApp.controller('TodoCtrl', function($scope, $q, $http) {
 
             $http.get(BASE_URL + "auth/currentuser").success(function(data) {
-                current_user = data.id; 
+                current_user = data; 
                 var queues = $http.get(BASE_URL + "teacher/" + current_user + "/queues");
                     users = $http.get(BASE_URL + "user");
                     //current_user = $http.get(BASE_URL + "auth/currentuser");
@@ -158,12 +158,14 @@
 
             $scope.prepareDataForTeacher = function(arrayOfResults) {
                 var users = arrayOfResults[1].data;
+                /*
                 // set current teacher param
                 for (var i = 0; i < users.length; i++) {
                     if (users[i].id === $scope.current_teacher) {
                         $scope.current_teacher = users[i];
                     } 
                 }
+                */ 
                 var queues = arrayOfResults[0].data;
                 $scope.queues =  queues;
             };

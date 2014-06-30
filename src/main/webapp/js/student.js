@@ -1,5 +1,5 @@
 
-    var BASE_OF_BASE_URL = "http://188.226.132.225:8080/newapi/";
+    var BASE_OF_BASE_URL = "";
     var BASE_URL = BASE_OF_BASE_URL + "webresources/studentsqueue.";
 
     //if (window.location.hash == "#student") {

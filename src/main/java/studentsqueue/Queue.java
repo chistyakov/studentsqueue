@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package studentsqueue;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,17 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author teamdevelopment
- */
 @Entity
 @Table(name = "QUEUE")
 @XmlRootElement
@@ -54,12 +46,14 @@ public class Queue implements Serializable {
     @Column(name = "NAME")
     private String name;
     @Column(name = "IN_PROCESS")
-    private Character inProcess;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "queueId")
-    private Collection<StudentInQueue> studentInQueueCollection;
-    @JoinColumn(name = "TEACHER_ID", referencedColumnName = "USER_ID")
+    private Character inProcess = 'N';
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "queue")
+    @OrderColumn(name="RANK")
+    private List<StudentInQueue> studentInQueueList;
+    @NotNull
+    @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Teacher teacherId;
+    private Teacher teacher;
 
     public Queue() {
     }
@@ -97,21 +91,20 @@ public class Queue implements Serializable {
         this.inProcess = inProcess;
     }
 
-    @XmlTransient
-    public Collection<StudentInQueue> getStudentInQueueCollection() {
-        return studentInQueueCollection;
+    public List<StudentInQueue> getStudentInQueueList() {
+        return studentInQueueList;
     }
 
-    public void setStudentInQueueCollection(Collection<StudentInQueue> studentInQueueCollection) {
-        this.studentInQueueCollection = studentInQueueCollection;
+    public void setStudentInQueueList(List<StudentInQueue> studentInQueueList) {
+        this.studentInQueueList = studentInQueueList;
     }
 
-    public Teacher getTeacherId() {
-        return teacherId;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherId(Teacher teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     @Override
@@ -138,5 +131,4 @@ public class Queue implements Serializable {
     public String toString() {
         return "studentsqueue.Queue[ id=" + id + " ]";
     }
-    
 }

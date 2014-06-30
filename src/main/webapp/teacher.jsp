@@ -32,26 +32,30 @@
 			<div>
 				<h4 class="margin">My queues:</h4>	            
 				<div class="queues">
-					<div ng-repeat="queue in queues | filter:isMyQueue()" class='well margin'>
+					<div ng-repeat="queue in queues | filter:isMyQueue()" class='well margin' ng-class="{'in-process': queue.inProcess == 'Y'}">
 						<span>
-							<i ng-show="queue.students.length" class="expand-queue icon-large icon-angle-down"></i>
+							<i ng-show="queue.studentInQueueList.length" class="expand-queue icon-large icon-angle-down"></i>
 						</span>
 						<span class="lead">{{queue.name}}</span>
-						<span class="lead">({{queue.students.length}})</span>
+						<span class="lead">({{queue.studentInQueueList.length}})</span>
+						<span class="lead reception-control">
+							<label for="">Start reception</label>
+							<input type="checkbox" ng-checked='queue.inProcess == "Y"' ng-click="toggleReception(queue)">
+						</span>
 						<span ng-click='removeQueue(queue)'>
 							<i class="icon-remove pull-right" title="Delete this queue"></i>
 						</span>
-						<table class="table" ng-show="queue.students.length">
-							<tr ng-show="queue.students.length">
+						<table class="table" ng-show="queue.studentInQueueList.length">
+							<tr ng-show="queue.studentInQueueList.length">
 								<th>Number</th>
 								<th>Student</th>
 								<th>Group</th>
 							</tr>
-							<tr ng-repeat="item in queue.students">
-								<td ng-class="{'current': item.student_id==current_student.id}" >{{$index+1}}</td>
-								<td ng-class="{'current': item.student_id==current_student.id}">{{item.studentName}}</td>
-								<td ng-class="{'current': item.student_id==current_student.id}">{{item.groupName}}</td>
-								<td ng-click='deleteStudentFromQueue(item)'><i title="drop student from queue" class="icon-remove pull-right"></i></td>
+							<tr ng-repeat="item in queue.studentInQueueList">
+								<td>{{item.rank + 1}}</td>
+								<td>{{item.student.realName}}</td>
+								<td>{{item.student.groupName}}</td>
+								<td ng-click='deleteStudentFromQueue(queue, item.student)'><i title="drop student from queue" class="icon-remove pull-right"></i></td>
 							</tr>
 						</table>
 					</div>

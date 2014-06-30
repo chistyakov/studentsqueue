@@ -27,12 +27,12 @@
 				<div ng-show="isAnyActiveQueue()">
 					<h4 class="margin">My queues:</h4>	            
 					<div class="queues">
-						<div ng-repeat="queue in queues | filter:isCurrentQueue()" class='well margin'>
+						<div ng-repeat="queue in queues | filter:isCurrentQueue()" class='well margin'  ng-class="{'in-process': queue.inProcess == 'Y'}">
 							<span ng-click='expand(queue)'>
 								<i class="expand-queue icon-large icon-angle-down"></i>
 							</span>
 							<span class="lead">{{queue.name}}</span>
-							<span class="lead">(Total students: {{queue.students.length}})</span>
+							<span class="lead">(Total students: {{queue.studentInQueueList.length}})</span>
 							<span ng-click='deleteStudentFromQueue(queue)'>
 								<i class="icon-remove pull-right" title="Exit from the queue"></i>
 							</span>
@@ -42,10 +42,10 @@
 									<th>Student</th>
 									<th>Group</th>
 								</tr>
-								<tr ng-repeat="item in queue.students">
-									<td ng-class="{'current': item.student_id==current_student.id}" >{{$index+1}}</td>
-									<td ng-class="{'current': item.student_id==current_student.id}">{{item.studentName}}</td>
-									<td ng-class="{'current': item.student_id==current_student.id}">{{item.groupName}}</td>
+								<tr ng-repeat="item in queue.studentInQueueList">
+									<td ng-class="{'current': item.student.id==current_student.id}" >{{item.rank + 1}}</td>
+									<td ng-class="{'current': item.student.id==current_student.id}">{{item.student.realName}}</td>
+									<td ng-class="{'current': item.student.id==current_student.id}">{{item.student.groupName}}</td>
 								</tr>
 							</table>
 						</div>
@@ -70,7 +70,7 @@
 							<div>
 								<label>Select queue</label>
 								<select class="dropdown" 
-									ng-options="item.name for item in queues | filter:isNewQueue()"
+									ng-options="item.name for item in newTeacher.queues | filter:isNewQueue()"
 									ng-model="newQueue"
 									placeholder='Select queue'
 								>

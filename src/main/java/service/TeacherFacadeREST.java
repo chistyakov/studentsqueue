@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import java.math.BigDecimal;
@@ -17,15 +13,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import studentsqueue.Queue;
 import studentsqueue.Teacher;
 
-/**
- *
- * @author teamdevelopment
- */
 @Stateless
 @Path("studentsqueue.teacher")
 public class TeacherFacadeREST extends AbstractFacade<Teacher> {
+
     @PersistenceContext(unitName = "com.mycompany_studentsqueue_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -81,9 +75,47 @@ public class TeacherFacadeREST extends AbstractFacade<Teacher> {
         return String.valueOf(super.count());
     }
 
+    @GET
+    @Path("{teacherId}/queues")
+    @Produces({"application/json"})
+    public List<Queue> getQueuesByStudnet(@PathParam("teacherId") BigDecimal teacherId) {
+        List<Queue> queues = em
+                .createNamedQuery("Teacher.getQueuesByTeacher")
+                .setParameter("teacherId", teacherId)
+                .getResultList();
+        return queues;
+    }
+
+    @PUT
+    @Path("startprocessqueue/{queueId}")
+    @Produces({"application/json"})
+    public Queue startProcessQueue(@PathParam("queueId") BigDecimal queueId) {
+        em.createNamedQuery("Teacher.startProcessQueue")
+                .setParameter("queueId", queueId)
+                .executeUpdate();
+        Queue queue = (Queue) em.createNamedQuery("Queue.findById")
+                .setParameter("id", queueId)
+                .getSingleResult();
+        em.refresh(queue);
+        return queue;
+    }
+
+    @PUT
+    @Path("pauseprocessqueue/{queueId}")
+    @Produces({"application/json"})
+    public Queue pauseProcessQueue(@PathParam("queueId") BigDecimal queueId) {
+        em.createNamedQuery("Teacher.pauseProcessQueue")
+                .setParameter("queueId", queueId)
+                .executeUpdate();
+        Queue queue = (Queue) em.createNamedQuery("Queue.findById")
+                .setParameter("id", queueId)
+                .getSingleResult();
+        em.refresh(queue);
+        return queue;
+    }
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
 }

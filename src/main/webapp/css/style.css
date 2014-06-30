@@ -99,6 +99,10 @@ hr {
 	padding: 5px;
 	box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 	cursor: pointer;
+	transition: all 0.4s;
+}
+.well.in-process {
+	background-color: rgb(210, 248, 212);
 }
 
 .ng-scope  .table 
@@ -106,6 +110,10 @@ hr {
 	display: none;
 
 	transition: all 0.4s;
+}
+
+.reception-control {
+	margin-left: 10px;
 }
 
 .expanded .table {

@@ -1,79 +1,70 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package studentsqueue;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author teamdevelopment
- */
+@XmlTransient
 @Entity
 @Table(name = "QUSER")
-@XmlRootElement
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="USER_ROLE")
 @NamedQueries({
-    @NamedQuery(name = "Quser.findAll", query = "SELECT q FROM Quser q"),
-    @NamedQuery(name = "Quser.findById", query = "SELECT q FROM Quser q WHERE q.id = :id"),
-    @NamedQuery(name = "Quser.findByUsername", query = "SELECT q FROM Quser q WHERE q.username = :username"),
-    @NamedQuery(name = "Quser.findByPasswordHash", query = "SELECT q FROM Quser q WHERE q.passwordHash = :passwordHash"),
-    @NamedQuery(name = "Quser.findByRealName", query = "SELECT q FROM Quser q WHERE q.realName = :realName")})
-public class Quser implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT q FROM User q"),
+    @NamedQuery(name = "User.findById", query = "SELECT q FROM User q WHERE q.id = :id"),
+    @NamedQuery(name = "User.findByUsername", query = "SELECT q FROM User q WHERE q.username = :username"),
+    @NamedQuery(name = "User.findByPasswordHash", query = "SELECT q FROM User q WHERE q.passwordHash = :passwordHash"),
+    @NamedQuery(name = "User.findByRealName", query = "SELECT q FROM User q WHERE q.realName = :realName")})
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     // use allocationSize=1 because of this shit: http://stackoverflow.com/a/20267392
-    @SequenceGenerator(name="QUSER_ID_GEN", sequenceName="USERS_SEQ", allocationSize=1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="QUSER_ID_GEN")
+    @SequenceGenerator(name="USER_ID_GEN", sequenceName="USERS_SEQ", allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_ID_GEN")
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID")
     private BigDecimal id;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 20)
+    @NotNull
     @Column(name = "USERNAME")
     private String username;
     @Basic(optional = false)
+    @Size(min = 64, max = 64)
     @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "PASSWORD_HASH")
+    @XmlTransient
     private String passwordHash;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "REAL_NAME")
     private String realName;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "quser")
-    private Student student;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "quser")
-    private Teacher teacher;
 
-    public Quser() {
+    public User() {
     }
 
-    public Quser(BigDecimal id) {
+    public User(BigDecimal id) {
         this.id = id;
     }
 
-    public Quser(BigDecimal id, String username, String passwordHash, String realName) {
+    public User(BigDecimal id, String username, String passwordHash, String realName) {
         this.id = id;
         this.username = username;
         this.passwordHash = passwordHash;
@@ -96,6 +87,7 @@ public class Quser implements Serializable {
         this.username = username;
     }
 
+    @XmlTransient
     public String getPasswordHash() {
         return passwordHash;
     }
@@ -112,22 +104,6 @@ public class Quser implements Serializable {
         this.realName = realName;
     }
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -138,10 +114,10 @@ public class Quser implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Quser)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Quser other = (Quser) object;
+        User other = (User) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -152,5 +128,4 @@ public class Quser implements Serializable {
     public String toString() {
         return "studentsqueue.Quser[ id=" + id + " ]";
     }
-    
 }

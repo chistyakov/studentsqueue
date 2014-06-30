@@ -15,7 +15,7 @@
                 $scope.current_student = arrayOfResults[3].data;
                 if (!$scope.current_student.groupName)
                 {
-                    window.location= BASE_OF_BASE_URL + "teacher.jsp";
+                    window.location= BASE_OF_BASE_URL + "teacher.html";
                 }
                 console.timeEnd("Retrieve data from server");
                 console.time("Convert JSON processing");

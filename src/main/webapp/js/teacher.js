@@ -191,8 +191,10 @@
                     //window.location= BASE_OF_BASE_URL + "login.html";
                 }
 				
-            })
-			window.location= BASE_OF_BASE_URL;
+            });
+            var str = location.href;
+            str = str.substr(0, str.indexOf('/teacher.html'));
+	    window.location= str;
         });
         $('.logout').attr('href', BASE_URL + 'auth/logout');
     })

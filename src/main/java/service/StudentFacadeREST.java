@@ -28,10 +28,12 @@ public class StudentFacadeREST extends AbstractFacade<Student> {
     }
 
     @POST
-    @Override
+//    @Override
     @Consumes({"application/json"})
-    public void create(Student entity) {
+    @Produces({"application/json"})
+    public Student createStudent(Student entity) {
         super.create(entity);
+        return entity;
     }
 
     @PUT
